@@ -18,9 +18,12 @@ export default {
       }
     }
 
-    function fetch ({url, type: method, data: params, isHideLoading}) {
+    function fetch (url, method, params) {
+      const isHideLoading = params.loading
       if (!isHideLoading) {
         store.commit('updateLoadingStatus', {isLoading: true})
+      } else {
+        delete params.loading
       }
       return new Promise((resolve, reject) => {
         axios({
@@ -51,6 +54,8 @@ export default {
       })
     }
 
-    Vue.prototype.$_http = fetch
+    Vue.prototype.$_http = {
+      scanLogin: params => fetch('app-mall-scan/login', 'get', params)
+    }
   }
 }

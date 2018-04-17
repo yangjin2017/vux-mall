@@ -33,7 +33,7 @@ export default {
           if (!data) {
             reject(data)
           } else if (data.code === 'A-00028') {
-            Vue.$router.push('/login')
+            this.$router.push('/login')
           } else if (data != null && data.code === 'A-00000' && data.obj !== undefined) {
             resolve(data.obj)
           }

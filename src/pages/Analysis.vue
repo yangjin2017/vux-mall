@@ -32,9 +32,8 @@ function login(vm){
   let m = vm.$route.query.m
   let p = vm.$route.query.p
   let v = vm.$route.query.v
-  vm.$_http({
-    url: `app-mall-scan/login?p=${p}`,
-    type: 'get'
+  vm.$_http.scanLogin({
+    p: p
   }).then(res => {
     vm.$_localUser.removeUser()
     vm.$_localUser.setUserId(res.mallSysUserInfoId)

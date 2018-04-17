@@ -9,7 +9,7 @@
     display: block;
 }
 .yungu-icon-go-right{
-    /* background: url("../img/icon-go-right.png"); */
+    background: url("./assets/img/icon-go-right.png");
     -moz-background-size:28px 28px; /* 老版本的 Firefox */
     background-size:28px 28px;
     background-repeat:no-repeat;
@@ -22,7 +22,7 @@
     display: block;
 }
 .yungu-icon-filter{
-    /* background: url("../img/icon-filter.png"); */
+    background: url("./assets/img/icon-filter.png");
     -moz-background-size:32px 32px; /* 老版本的 Firefox */
     background-size:26px 26px;
     background-repeat:no-repeat;
@@ -276,7 +276,7 @@
 .yungu-pay-success-info .yungu-pay-bg-img{
     margin-top: 2.4rem;
     min-height: 6rem;
-    /* background-image: url("../img/pay-success.png"); */
+    background-image: url("./assets/img/pay-success.png");
     background-size: 4.4rem 4.4rem;
     background-repeat: no-repeat;
     background-position: center;
@@ -303,7 +303,7 @@
 .yungu-pay-fail-info .yungu-pay-bg-img{
     margin-top: 2.4rem;
     min-height: 6rem;
-    /* background-image: url("../img/pay-fail.png"); */
+    background-image: url("./assets/img/pay-fail.png");
     background-size: 4.4rem 4.4rem;
     background-repeat: no-repeat;
     background-position: center;
@@ -311,7 +311,7 @@
 .yungu-pay-fail-info .yungu-timeout-bg-img{
     margin-top: 2.4rem;
     min-height: 6rem;
-    /* background-image: url("../img/overtime.png"); */
+    background-image: url("./assets/img/overtime.png");
     background-size: 4.4rem 4.4rem;
     background-repeat: no-repeat;
     background-position: center;
@@ -418,7 +418,7 @@
 .yungu-my-order-header .yungu-order-detail{
     display: inline-block;
     width: 14px;
-    /* background: url("../img/icon-go-left-small.png"); */
+    background: url("./assets/img/icon-go-left-small.png");
     -moz-background-size:12px 12px; /* 老版本的 Firefox */
     background-size:12px 12px;
     background-repeat:no-repeat;
@@ -622,7 +622,7 @@
 }
 .yungu-addresses-content-todo .yungu-addresses-content-delete{
     float: right;
-    /* background: url("../img/btn_delete.png"); */
+    background: url("./assets/img/btn_delete.png");
     -moz-background-size:12px 16px; /* 老版本的 Firefox */
     background-size:12px 16px;
     background-repeat:no-repeat;
@@ -634,7 +634,7 @@
 }
 .yungu-addresses-content-todo .yungu-addresses-content-edit{
     float: right;
-    /* background: url("../img/btn_edit.png"); */
+    background: url("./assets/img/btn_edit.png");
     -moz-background-size:12px 16px; /* 老版本的 Firefox */
     background-size:12px 16px;
     background-repeat:no-repeat;
@@ -645,7 +645,7 @@
     padding-left: 0.8rem;
 }
 .yungu-addresses-content-todo .yungu-addresses-content-now {
-    /* background: url("../img/check.png"); */
+    background: url("./assets/img/check.png");
     -moz-background-size:16px 16px; /* 老版本的 Firefox */
     background-size:16px 16px;
     background-repeat:no-repeat;
@@ -657,7 +657,7 @@
     padding-left: 1.0rem;
 }
 .yungu-addresses-content-todo .yungu-addresses-content-now.active {
-    /* background: url("../img/checked.png"); */
+    background: url("./assets/img/checked.png");
     -moz-background-size:16px 16px; /* 老版本的 Firefox */
     background-size:16px 16px;
     background-repeat:no-repeat;
@@ -706,7 +706,7 @@
     border-bottom: 1px #d3d3d3 solid;
 }
 .yungu-address-save-now .yungu-address-save-now-check{
-    /* background: url("../img/check.png"); */
+    background: url("./assets/img/check.png");
     -moz-background-size:20px 20px; /* 老版本的 Firefox */
     background-size:20px 20px;
     background-repeat:no-repeat;
@@ -715,7 +715,7 @@
     height: 2rem;
 }
 .yungu-address-save-now .yungu-address-save-now-check.active{
-     /* background: url("../img/checked.png"); */
+     background: url("./assets/img/checked.png");
      -moz-background-size:20px 20px; /* 老版本的 Firefox */
      background-size:20px 20px;
      background-repeat:no-repeat;
@@ -748,7 +748,7 @@
     line-height: 1.8rem;
     border-bottom: 1px #d3d3d3 solid;
     padding-left: 0.6rem;
-    /* background: url("../img/icon-go-left-small.png"); */
+    background: url("./assets/img/icon-go-left-small.png");
     -moz-background-size:12px 12px; /* 老版本的 Firefox */
     background-size:12px 12px;
     background-repeat:no-repeat;
@@ -789,7 +789,7 @@
     margin-bottom: 0.2rem;
 }
 .yungu-order-detail-header .yungu-order-detail-header-img{
-    /* background: url("../img/seg_mail.png"); */
+    background: url("./assets/img/seg_mail.png");
     background-repeat:repeat-x;
     background-position:center;
     -moz-background-size:2.8rem 0.2rem; /* 老版本的 Firefox */
@@ -961,7 +961,7 @@
     padding-left: 1rem;
 }
 .yungu-order-confirm-payway-weixin span:first-child{
-    /* background: url("../img/icon-weixin.png"); */
+    background: url("./assets/img/icon-weixin.png");
     background-repeat:no-repeat;
     background-position:left;
     -moz-background-size:28px 28px; /* 老版本的 Firefox */
@@ -974,7 +974,7 @@
     content: "\00A0";
 }
 .yungu-order-confirm-payway-weixin-check {
-    /* background: url("../img/check.png"); */
+    background: url("./assets/img/check.png");
     -moz-background-size: 30px 30px; /* 老版本的 Firefox */
     background-size: 16px 16px;
     background-repeat: no-repeat;
@@ -986,7 +986,7 @@
     right: 1rem;
 }
 .yungu-order-confirm-payway-weixin-check.active {
-    /* background: url("../img/checked.png"); */
+    background: url("./assets/img/checked.png");
     -moz-background-size: 30px 30px; /* 老版本的 Firefox */
     background-size: 16px 16px;
     background-repeat: no-repeat;
@@ -1004,7 +1004,7 @@
     padding-left: 1rem;
 }
 .yungu-order-confirm-payway-alipay span:first-child{
-    /* background: url("../img/icon-alipay.png"); */
+    background: url("./assets/img/icon-alipay.png");
     background-repeat:no-repeat;
     background-position:left;
     -moz-background-size:28px 28px; /* 老版本的 Firefox */
@@ -1182,7 +1182,7 @@
 .yungu-goods-detail-back{
     position: absolute;
     z-index: 2;
-    /* background: url("../img/good-detail-back.png"); */
+    background: url("./assets/img/good-detail-back.png");
     -moz-background-size:32px 32px; /* 老版本的 Firefox */
     background-size:26px 26px;
     background-repeat:no-repeat;

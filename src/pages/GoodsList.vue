@@ -33,15 +33,11 @@ export default {
   },
   methods: {
     initData: function () {
-      this.$_http({
-        url: 'app/mall-goods/goods',
-        type: 'get',
-        data: {
-          pageNo: this.pageNo,
-          pageSize: this.pageSize,
-          categoryId: this.categoryId,
-          hospitalCode: this.hospitalCode
-        }
+      this.$_http.goods({
+        pageNo: this.pageNo,
+        pageSize: this.pageSize,
+        categoryId: this.categoryId,
+        hospitalCode: this.hospitalCode
       }).then(response => {
         this.goodsList = this.goodsList.concat(response.list)
       })
@@ -50,10 +46,17 @@ export default {
       this.pageNo = 1
       this.goodsList = []
       this.initData()
+    },
+    tabSwitch(){
+      this.categoryId = this.$route.params.categoryId
+      this.refresh()
     }
   },
   created: function () {
     this.initData()
+  },
+  watch: {
+    $route: "tabSwitch"
   },
   components: {
     GoodsItem

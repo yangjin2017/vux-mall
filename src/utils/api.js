@@ -19,6 +19,7 @@ export default {
     }
 
     function fetch (url, method, params) {
+      params = params || {}
       const isHideLoading = params.loading
       if (!isHideLoading) {
         store.commit('updateLoadingStatus', {isLoading: true})
@@ -55,7 +56,11 @@ export default {
     }
 
     Vue.prototype.$_http = {
-      scanLogin: params => fetch('app-mall-scan/login', 'get', params)
+      scanLogin: params => fetch('app-mall-scan/login', 'get', params),   // 扫描二维码登录
+      goods: params => fetch('app/mall-goods/goods', 'get', params),   // 商品列表
+      categoryMedical: params => fetch('app/mall-platform-category/categories/medical', 'get', params),   // 加载药械商品的分类
+      categoryOrdinary: params => fetch('app/mall-platform-category/categories/ordinary', 'get', params),  // 加载普通商品的分类
+      categories: params => fetch(`app/mall-platform-category/parent/${params.categoryId}/categories/`, 'get', params),   // 加载商品二级分类
     }
   }
 }

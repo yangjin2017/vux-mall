@@ -17,8 +17,11 @@ export default new Router({
     {
       path: '/index',
       component: Index,
-      redirect: '/goods',
+      redirect: '/index/goods',
       children: [
+        {
+          path: 'goods', component: GoodsList
+        },
         {
           path: 'goods/:categoryId', component: GoodsList
         },
@@ -26,6 +29,14 @@ export default new Router({
           path: 'orders', component: Orders
         }
       ]
+    },
+    {
+      path: '/goods',
+      redirect: '/index/goods'
+    },
+    {
+      path: '/orders',
+      redirect: '/index/orders'
     },
     {
       path: '/analysis',

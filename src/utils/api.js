@@ -31,7 +31,8 @@ export default {
           method: method,
           url: url,
           params: params,
-          headers: getUser()
+          headers: getUser(),
+          withCredentials: true
         }).then(response => {
           var data = response.data
           if (!data) {

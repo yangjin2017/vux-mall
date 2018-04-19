@@ -25,7 +25,7 @@
         </div>
         <div class="yungu-goods-detail-price">
           <span class="yungu-goods-detail-price-now">¥ 
-            <templete v-if="bookSpec.priceSpec">{{ bookSpec.priceSpec | priceFormat }}</templete>
+            <template v-if="bookSpec.priceSpec">{{ bookSpec.priceSpec | priceFormat }}</template>
             <template v-else-if="priceSize.min == priceSize.max">{{ priceSize.min | priceFormat }}</template>
             <template v-else>{{ priceSize.min | priceFormat }} ~ {{ priceSize.max | priceFormat }}</template>
           </span>
@@ -37,7 +37,8 @@
           </div>
 
           <div class="tabs yungu-good-detail-tab">
-            <div class="tab" v-for="(item, index) in goodsPart" :key="index"></div>
+            <div class="tab" ></div>
+            <iframe v-for="(item, index) in goods.mallGoodsPartList" :key="index" :src="item.partUrl" frameborder="0" scrolling="no" v-goods-part-content="index"></iframe>
           </div>
         </div>
         <div class="yungu-disabled-content"></div>
@@ -52,6 +53,7 @@
 
 <script>
 import { Previewer, Swiper, SwiperItem, XNumber, TransferDom } from "vux";
+import { setTimeout } from 'timers';
 export default {
   data() {
     return {
@@ -120,11 +122,6 @@ export default {
       this.bookSpec = this.goods.mallGoodsDetailsSpecTVoList[index]
     },
     loadGoodsPartData(url, index) {
-      // this.$_http.goodsPartData({
-      //   url: url
-      // }).then(data => {
-      //   console.log(data)
-      // })
       
     }
   },
@@ -132,7 +129,13 @@ export default {
     this.initData()
   },
   directives: {
-    TransferDom
+    TransferDom,
+    goodsPartContent(el, binding, vnode) {
+      el.onload = () => {
+        console.log(el.contentWindow.document.body.innerHTML);
+        // vnode.context.loadGoodsPartData()
+      }
+    }
   }
 };
 </script>

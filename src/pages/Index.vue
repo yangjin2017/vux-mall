@@ -7,7 +7,9 @@
         <!-- <x-switch class="col-50" title="" v-model="showFilter"></x-switch> -->
       </a>
     </nav-bar>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view :key="type"></router-view>
+    </keep-alive>
     <div v-transfer-dom>
       <popup v-model="showFilter" position="right" style="background-color: #fff;">
         <div style="width: 12rem;">
@@ -145,6 +147,7 @@ export default {
       this.$_http.categoryOrdinary().then(data => {
         this.category.ordinary = data
       })
+      this.tabSwitch()
     }
   },
   created(){

@@ -61,6 +61,8 @@ export default {
       categoryMedical: params => fetch('app/mall-platform-category/categories/medical', 'get', params),   // 加载药械商品的分类
       categoryOrdinary: params => fetch('app/mall-platform-category/categories/ordinary', 'get', params),  // 加载普通商品的分类
       categories: params => fetch(`app/mall-platform-category/parent/${params.categoryId}/categories/`, 'get', params),   // 加载商品二级分类
+      goodsDetail: params => fetch(`app/mall-goods/goods/${params.goodsId}/message`, 'get', params),   // 获取商品详情
+      goodsPartData: params => fetch(params.url, 'get', {loading: true})   // 加载商品详情介绍
     }
   }
 }

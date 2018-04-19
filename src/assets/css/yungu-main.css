@@ -266,10 +266,37 @@
     bottom: 0rem;
     width: 100%;
 }
-/* @font-face {
-    font-family: 'hanziguangzhen';
-    src: url('../fonts/hanzhenguangzhen.ttf');
-} */
+/*@font-face {*/
+    /*font-family: 'hanziguangzhen';*/
+    /*src: url('../fonts/hanzhenguangzhen.ttf');*/
+/*}*/
+.yungu-pay-confirm-info{
+    text-align: center;
+}
+.yungu-pay-confirm-info .yungu-pay-confirm-bg-img{
+    margin-top: 2.4rem;
+    min-height: 6rem;
+    background-image: url("./assets/img/icon-money.png");
+    background-size: 4.4rem 4.4rem;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.yungu-pay-confirm-info .yungu-pay-confirm-bg-text{
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+.yungu-pay-confirm-button{
+    background-color:#7e90e4;
+    color: #ffffff;
+    font-size: 0.7rem;
+    line-height: 2.2rem;
+    display: block;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-border-radius:3px; /* Old Firefox */
+}
 .yungu-pay-success-info{
     text-align: center;
 }
@@ -283,7 +310,7 @@
 }
 .yungu-pay-success-info .yungu-pay-bg-text{
     font-size: 1.6rem;
-    font-family: "hanziguangzhen";
+    font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif,"SimSun";
     margin-bottom: 3rem;
 }
 .yungu-pay-success-button{
@@ -318,12 +345,13 @@
 }
 .yungu-pay-fail-info .yungu-pay-bg-text{
     font-size: 1.6rem;
-    font-family: "hanziguangzhen";
+    font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif,"SimSun";
     margin-bottom: 3rem;
+    color:#000000;
 }
 .yungu-pay-fail-button{
-    background-color: #fa4c0f;
-    color: #ffffff;
+    background-color: #f4f4f4;
+    color: #000000;
     font-size: 0.7rem;
     line-height: 2.2rem;
     display: block;
@@ -376,7 +404,7 @@
     -moz-border-radius:3px; /* Old Firefox */
     display: block;
     text-align: center;
-    line-height: 1.6rem;
+    line-height: 2rem;
 }
 .yungu-bind-mobile-login.disabled{
     pointer-events: none;
@@ -386,9 +414,10 @@
     background-color: #e7e7f0;
 }
 .yungu-my-orders-tab-title{
-    position: fixed;
+    position: absolute;
     width: 100%;
     z-index: 2;
+    top: 2.2rem;
 }
 .yungu-my-orders-tab-title .yungu-tab-title{
     font-size: 0.72rem;
@@ -585,6 +614,7 @@
 }
 .yungu-addresses-content{
     font-size: 0.65rem;
+    margin-bottom: 4rem;
 }
 .yungu-addresses-content ul{
     list-style: none;
@@ -771,7 +801,37 @@
     line-height: 1.8rem;
     border-bottom: 1px #d3d3d3 solid;
 }
-
+.yungu-order-detail-header-info{
+    background: url("./assets/img/icon-go-left-small.png");
+    background-repeat:no-repeat;
+    background-size:14px 14px;
+    min-height: 3.0rem;
+    background-repeat:no-repeat;
+    background-position: 97% center;
+    background-position: -webkit-calc(100% - .6rem) center;
+    background-position: calc(100% - .6rem) center;
+}
+.yungu-order-detail-header-info .yungu-order-detail-header-none-address{
+    padding-left: 0.6rem;
+    min-height: 3.0rem;
+    line-height: 3.0rem;
+}
+.yungu-order-detail-header-info .yungu-order-detail-header-lcation{
+    background: url("./assets/img/icon_address.png");
+    background-repeat:no-repeat;
+    background-position:center;
+    -moz-background-size:17px 22px; /* 老版本的 Firefox */
+    background-size:17px 22px;
+    min-height: 3rem;
+    width: 2rem;
+    position: absolute;
+    left: 0rem;
+}
+.yungu-order-detail-header-info .yungu-order-detail-header-content{
+    min-height: 3rem;
+    margin-left: 2rem;
+    padding-right: 1.8rem;
+}
 .yungu-order-detail-header-content .yungu-order-detail-header-name-mobile{
     min-height: 1.6rem;
     line-height: 1.6rem;
@@ -1122,28 +1182,29 @@
     margin: 0.2rem 0.6rem;
 }
 .yungu-goods-detail-header .yungu-goods-detail-spec-option a{
-    color:#8a8a8a;
+    color: #5f5f5f;
+    background-color: #f7f7f7;
     border: 0.02rem #e0e0e0 solid;
-    padding:0rem 0.2rem 0rem 0.2rem;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
     display: inline-block;
     margin-bottom: 0.2rem;
+    font-size: 0.65rem;
+    margin-right: 0.4rem;
 }
 .yungu-goods-detail-header .yungu-goods-detail-spec-option a.active{
     color:#1377ce;
     border: 0.02rem #1377ce solid;
-    display: inline-block;
 }
 .yungu-goods-detail-header .yungu-goods-detail-num{
     font-size: 0.7rem;
     color:#8a8a8a;
     margin: 0.2rem 0.6rem;
-    display: inline-block;
 }
-.yungu-goods-detail-header .yungu-goods-detail-num div{
+/*.yungu-goods-detail-header .yungu-goods-detail-num div{
     float: left;
     margin-right: 6px;
     line-height: 1.2rem;
-}
+}*/
 .yungu-goods-detail-header .yungu-goods-detail-price{
     margin: 0.2rem 0.6rem;
 }
@@ -1164,7 +1225,7 @@
     font-size: 0.6rem;
 }
 .yungu-good-detail-tab{
-    padding:0rem 0rem 0rem 0rem;
+    padding: 1rem;
 }
 .yungu-good-detail-tab .tab{
     overflow: auto;
@@ -1172,12 +1233,15 @@
 .yungu-good-detail-tab *{
     width: 100%;
     height: 100%;
-    text-align: center;
     display: block;
     -webkit-margin-before: 0px;
     -webkit-margin-after: 0px;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
+}
+.yungu-good-detail-tab img {
+    width: 100%;
+    height: auto;
 }
 .yungu-goods-detail-back{
     position: absolute;
@@ -1221,12 +1285,18 @@
     border-radius: 3px;
     -moz-border-radius: 3px;
 }
-
+.yungu-analysis-code{
+    text-align:center;
+    font-size:0.9rem;
+    margin-top:40%;
+    padding:0rem 1.6rem 0rem 1.6rem;
+    display:none;
+}
 .lazy-success {
     -webkit-animation: fadeIn 01s ease 0.2s 1 both;
     animation: fadeIn 1s ease 0.2s 1 both;
 }
-
+/**
 @-webkit-keyframes fadeIn {
     from {
         opacity: 0;
@@ -1243,4 +1313,181 @@
     to {
         opacity: 1;
     }
+}
+
+.page-from-center-to-left {
+    -webkit-animation: pageFromCenterToLeft 0ms forwards;
+    animation: pageFromCenterToLeft 0ms forwards;
+}
+.page-from-left-to-center {
+    -webkit-animation: pageFromLeftToCenter 0ms forwards;
+    animation: pageFromLeftToCenter 0ms forwards;
+}
+.page-from-right-to-center {
+    -webkit-animation: pageFromRightToCenter 0ms forwards;
+    animation: pageFromRightToCenter 0ms forwards;
+    z-index: 2002;
+}
+.page-from-center-to-right {
+    -webkit-animation: pageFromCenterToRight 0ms forwards;
+    animation: pageFromCenterToRight 0ms forwards;
+    z-index: 2002;
+}
+**/
+
+/** 退货退款  2018-3-15 @author yangjin */
+.yungu-popup-goods-status, .yungu-popup-refund-reason {
+	bottom: 0;
+	top: auto;
+	height: auto;
+}
+.yungu-popup-goods-status .item-title,
+.yungu-popup-refund-reason .item-title {
+	font-size: 0.7rem;
+}
+.yungu-goods-status-title {
+	line-height: 2.2rem;
+	font-size: 0.9rem;
+	text-align: center;
+}
+.yungu-popup-close {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	line-height: 2.45rem;
+	font-size: 0.9rem;
+	color: #fff;
+	text-align: center;
+	background-color: #7596f5;
+}
+.yungu-radio {
+	width: 0.9rem;
+    height: 0.9rem;
+    border: none;
+    background-color: none;
+    background: url(./assets/img/check.png) no-repeat;
+    background-size: 100%;
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    cursor: default;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-transition: background-color ease 0.1s;
+    transition: background-color ease 0.1s;
+}
+.yungu-radio:checked {
+	background-image: url(./assets/img/checked.png);
+}
+.yungu-list-block {
+	margin: 0;
+	padding-bottom: 2.45rem;
+}
+.popup .yungu-list-block ul{
+	height: 15.4rem;
+	overflow-y: scroll;
+}
+.yungu-list-block ul:after {
+	content: none;
+}
+.yungu-content-refund {
+	padding-top: 0.5rem;
+	background-color: #fff;
+	font-size: 0.7rem;
+}
+.yungu-content-refund .list-block, .yungu-content-refund .list-block input {
+	font-size: 0.7rem;
+}
+.yungu-my-order-content {
+	background-color: #F5F5F5;
+}
+.yungu-content-refund .yungu-refund-item-content {
+	display: block;
+}
+.yungu-refund-item-content .row {
+	padding: 0 1rem;
+}
+.yungu-refund-item-content img {
+	width: 100%;
+}
+.yungu-refund-item-content .add {
+	padding: 0.8rem 0;
+	border: 1px dashed #888;
+	text-align: center;
+}
+.yungu-refund-item-content .add img{
+	width: 0.95rem;
+	height: 0.8rem;
+}
+.yungu-refund-item-content .add p{
+	margin: 0;
+	font-size: 0.5rem;
+	color: #888;
+}
+
+.yungu-refund-logistics {
+	padding-top: 0.5rem;
+}
+.yungu-refund-logistics-title {
+	line-height: 2.2rem;
+	font-size: 0.7rem;
+	padding-left: 0.75rem;
+}
+.yungu-refund-logistics .list-block, .yungu-refund-logistics .list-block input {
+	font-size: 0.7rem;
+}
+
+.yungu-order-refund-price {
+	color: #fa4c0f;
+}
+.yungu-refund-tips {
+	color: #888;
+}
+.yungu-my-order-btn{
+	display: block;
+	line-height: 1.4rem;
+	min-width: 3.6rem;
+	margin-top: 1rem;
+	color: #333;
+	text-align: center;
+	border: 2px solid #666;
+	border-radius: 3px;
+}
+.yungu-my-order-footer-todo a.refund,
+.yungu-my-order-footer-todo a.remind{
+	color: #666;
+	border-color: #666;
+}
+
+/* 确认订单 -- 第三方供货商 -- 买家邮箱身份信息 */
+.yungu-order-delivery-extra {
+    display: none;
+    margin-top: 0.4rem;
+    border-top: 1px #e8e8e8 solid;
+    background: #fff;
+}
+.yungu-order-delivery-extra .yungu-order-delivery-extra-title {
+    line-height: 1.8rem;
+    padding-left: 0.6rem;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #e8e8e8;
+}
+.yungu-order-delivery-extra .yungu-item-title {
+    float: left;
+    width: 30%;
+    font-size: 0.7rem;
+    padding-left: 0.6rem;
+    line-height: 1.8rem;
+}
+.yungu-order-delivery-extra .yungu-item-input {
+    font-size: 0.7rem;
+    line-height: 1.8rem;
+    border: none;
+    width: 70%;
 }

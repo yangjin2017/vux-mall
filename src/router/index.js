@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/pages/Index'
 import GoodsList from '@/pages/GoodsList'
+import goodsDetail from '@/pages/GoodsDetail'
 import Orders from '@/pages/Orders'
 import Analysis from '@/pages/Analysis'
 import Timeout from '@/pages/Timeout'
@@ -13,6 +14,7 @@ import SupplierOrderConfirm from '@/pages/SupplierOrderConfirm'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/index',
@@ -33,6 +35,10 @@ export default new Router({
     {
       path: '/goods',
       redirect: '/index/goods'
+    },
+    {
+      path: '/goodsDetail/:goodsId',
+      component: goodsDetail
     },
     {
       path: '/orders',
@@ -62,5 +68,12 @@ export default new Router({
       path: '/supplier-order-confirm',
       component: SupplierOrderConfirm
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })

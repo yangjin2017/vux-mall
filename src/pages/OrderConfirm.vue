@@ -150,7 +150,7 @@ function getOrders (vm) {
     display: block;
   }
   .yungu-order-detail-header-info{
-    background: url("../../static/img/icon-go-left-small.png");
+    background: url("../assets/img/icon-go-left-small.png");
     background-repeat:no-repeat;
     background-size:14px 14px;
     min-height: 3.0rem;

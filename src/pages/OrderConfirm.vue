@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page page-current">
     <nav-bar title='确认订单'></nav-bar>
     <div class="content yungu-order-detail-success">
       <!-- 这里是页面内容区 -->
@@ -104,6 +104,7 @@ export default {
       orders: null
     }
   },
+  props: ['v'],
   computed: {
     supplierSource: function () {
       
@@ -114,70 +115,29 @@ export default {
     OrderGoodsItem
   },
   created: function () {
-    getPatient(this)
-    getOrders(this)
+    this.getPatient()
+    this.getOrders()
+  },
+  methods: {
+    getPatient,
+    getOrders
   }
 }
 
 // 获取病人信息
-function getPatient (vm) {
-  const userId = vm.$_localUser.getUser().userId
-  vm.$_http({
-    url: `mall-user-address/users/${userId}/hospital`,
-    type: 'get'
-  }).then(res => {
-    vm.patient = res
+function getPatient () {
+  const userId = this.$_localUser.getUser().userId
+  this.$_http.patient().then(res => {
+    this.patient = res
   })
 }
 
 // 获取订单信息
-function getOrders (vm) {
-  const userId = vm.$_localUser.getUser().userId
-  const v = vm.$route.query.v
-
-  vm.$_http({
-    url: `app-mall-scan/users/${userId}/cart?v=${v}`,
-    type: 'get'
+function getOrders () {
+  this.$_http.orderDetail({
+    idList: this.v
   }).then(res => {
-    vm.carts = res.carts
-    vm.orders = res.orders
+    this.orders = res
   })
 }
 </script>
-
-<style>
-  .page {
-    display: block;
-  }
-  .yungu-order-detail-header-info{
-    background: url("../assets/img/icon-go-left-small.png");
-    background-repeat:no-repeat;
-    background-size:14px 14px;
-    min-height: 3.0rem;
-    background-repeat:no-repeat;
-    background-position: 97% center;
-    background-position: -webkit-calc(100% - .6rem) center;
-    background-position: calc(100% - .6rem) center;
-  }
-  .yungu-order-detail-header-info .yungu-order-detail-header-none-address{
-    padding-left: 0.6rem;
-    min-height: 3.0rem;
-    line-height: 3.0rem;
-  }
-  .yungu-order-detail-header-info .yungu-order-detail-header-lcation{
-    /* background: url("../img/icon_address.png"); */
-    background-repeat:no-repeat;
-    background-position:center;
-    -moz-background-size:17px 22px; /* 老版本的 Firefox */
-    background-size:17px 22px;
-    min-height: 3rem;
-    width: 2rem;
-    position: absolute;
-    left: 0rem;
-  }
-  .yungu-order-detail-header-info .yungu-order-detail-header-content{
-    min-height: 3rem;
-    margin-left: 2rem;
-    padding-right: 1.8rem;
-  }
-</style>

@@ -4,6 +4,7 @@ import store from '../store'
 
 export default {
   install (Vue, pluginOptions = {}) {
+    // 配置请求地址域名信息
     axios.defaults.baseURL = CONSTANCE.DOMAIN
 
     /**
@@ -18,27 +19,30 @@ export default {
       }
     }
 
-    function fetch (url, method, params) {
-      params = params || {}
-      const isHideLoading = params.loading
+    const apiUrl = {
+      [CONSTANCE.API.GOODSDETAIL]: params => [`app/mall-goods/goods/${params.goodsId}/message`],
+      [CONSTANCE.API.CART]: params => [`mall-user-shop-cart/users/${getUser().userId}/cart`, 'post']
+    }
+
+    function fetch (api, data = {}, isHideLoading = false) {
       if (!isHideLoading) {
-        store.commit('updateLoadingStatus', {isLoading: true})
-      } else {
-        delete params.loading
+        store.commit(CONSTANCE.LOADING, {isLoading: true})
       }
+
+      let [url, method = 'get'] = apiUrl[api](data)
+
       return new Promise((resolve, reject) => {
         axios({
           method: method,
           url: url,
-          params: params,
-          headers: getUser(),
-          withCredentials: true
+          params: data,
+          headers: getUser()
         }).then(response => {
           var data = response.data
           if (!data) {
             reject(data)
           } else if (data.code === 'A-00028') {
-            this.$router.push('/login')
+            this.$router.push('/timeout')
           } else if (data != null && data.code === 'A-00000' && data.obj !== undefined) {
             resolve(data.obj)
           }
@@ -50,21 +54,12 @@ export default {
         })
         .finally(() => {
           if (!isHideLoading) {
-            store.commit('updateLoadingStatus', {isLoading: false})
+            store.commit(CONSTANCE.LOADING, {isLoading: false})
           }
         })
       })
     }
 
-    Vue.prototype.$_http = {
-      scanLogin: params => fetch('app-mall-scan/login', 'get', params),   // 扫描二维码登录
-      goods: params => fetch('app/mall-goods/goods', 'get', params),   // 商品列表
-      categoryMedical: params => fetch('app/mall-platform-category/categories/medical', 'get', params),   // 加载药械商品的分类
-      categoryOrdinary: params => fetch('app/mall-platform-category/categories/ordinary', 'get', params),  // 加载普通商品的分类
-      categories: params => fetch(`app/mall-platform-category/parent/${params.categoryId}/categories/`, 'get', params),   // 加载商品二级分类
-      goodsDetail: params => fetch(`app/mall-goods/goods/${params.goodsId}/message`, 'get', params),   // 获取商品详情
-      goodsPartData: params => fetch(params.url, 'get', {loading: true}),   // 加载商品详情介绍
-      cart: params => fetch(`mall-user-shop-cart/users/${getUser().userId}/cart`, 'post', params)   // 请求商品是否可以购买
-    }
+    Vue.prototype.$_http = fetch
   }
 }

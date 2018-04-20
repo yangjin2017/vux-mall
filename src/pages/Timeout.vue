@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page page-current">
 	  <nav-bar></nav-bar>
 	  <div class="content yungu-content-bgcolor">
       <div class="yungu-pay-fail-info">

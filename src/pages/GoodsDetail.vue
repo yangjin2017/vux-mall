@@ -52,8 +52,10 @@
 </template>
 
 <script>
-import { Previewer, Swiper, SwiperItem, XNumber, TransferDom, AlertModule } from "vux";
-import { setTimeout } from 'timers';
+import { Previewer, Swiper, SwiperItem, XNumber, TransferDom, AlertModule } from "vux"
+import { setTimeout } from 'timers'
+import CONSTANCE from '../utils/constance.js'
+import constance from '../utils/constance.js';
 export default {
   data() {
     return {
@@ -106,7 +108,7 @@ export default {
   },
   methods: {
     initData() {
-      this.$_http.goodsDetail({
+      this.$_http(CONSTANCE.API.GOODSDETAIL, {
         goodsId: this.$route.params.goodsId
       }).then(data => {
         this.goods = data
@@ -125,15 +127,17 @@ export default {
       if (this.$_isEmptyObject(this.bookSpec)) {
         AlertModule.show({
           title: '提示信息',
-          content: '请选择商品规格！'
+          content: '请选择商品规格！',
+          maskZIndex: 2000
         })
+        return
       }
 
-      this.$_http.cart({
+      this.$_http(CONSTANCE.API.CART, {
         mallGoodsSpecTId: this.bookSpec.id,
         specNum: this.bookNum
       }).then(data => {
-        this.$router.push('/order-confirm')
+        this.$router.push(`/order-confirm/${data}`)
       })
     },
     loadGoodsPartData(url, index) {

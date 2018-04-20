@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page page-current">
 	  <nav-bar :title='title'></nav-bar>
 	  <div class="content yungu-content-bgcolor">
       <div class="list-block yungu-bind-mobile">

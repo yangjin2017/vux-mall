@@ -59,8 +59,9 @@ export default new Router({
       component: Login
     },
     {
-      path: '/order-confirm',
-      component: OrderConfirm
+      path: '/order-confirm/:v',
+      component: OrderConfirm,
+      props: true
     },
     {
       path: '/supplier-login',

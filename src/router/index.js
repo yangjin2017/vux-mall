@@ -10,6 +10,8 @@ import Login from '@/pages/Login'
 import OrderConfirm from '@/pages/OrderConfirm'
 import SupplierLogin from '@/pages/SupplierLogin'
 import SupplierOrderConfirm from '@/pages/SupplierOrderConfirm'
+import Goods from '@/pages/Goods'
+import NotFound from '@/pages/NotFound'
 
 Vue.use(Router)
 
@@ -34,10 +36,10 @@ export default new Router({
     },
     {
       path: '/goods',
-      redirect: '/index/goods'
+      component: Goods
     },
     {
-      path: '/goodsDetail/:goodsId',
+      path: '/goods-detail/:goodsId',
       component: goodsDetail
     },
     {
@@ -67,6 +69,10 @@ export default new Router({
     {
       path: '/supplier-order-confirm',
       component: SupplierOrderConfirm
+    },
+    {
+      path: '*',
+      component: NotFound
     }
   ],
   scrollBehavior (to, from, savedPosition) {

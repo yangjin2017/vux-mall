@@ -25,7 +25,8 @@
     },
     methods: {
       openDetail(){
-        this.$router.push(`/goodsDetail/${this.goods.id}`)
+        this.$emit('detail')
+        this.$router.push(`/goods-detail/${this.goods.id}`)
       }
     }
   }

@@ -1,15 +1,29 @@
 <template>
-  <div class="page page-current">
-    <nav-bar :title="title">
+  <div>
+    <nav-bar title="商品列表">
       <a slot="right" class="yungu-button yungu-button-link pull-right row open-panel yungu-open-masking" data-panel='#panel-right-demo'>
         <span class="yungu-icon yungu-icon-filter col-50"></span>
         <span class="col-50" @click="showFilter = !showFilter">筛选</span>
-        <!-- <x-switch class="col-50" title="" v-model="showFilter"></x-switch> -->
       </a>
     </nav-bar>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <div class="content pull-to-refresh-content" id="content">
+      <!-- 默认的下拉刷新层 -->
+      <div class="pull-to-refresh-layer">
+        <div class="preloader"></div>
+        <div class="pull-to-refresh-arrow"></div>
+      </div>
+      <!-- 这里是页面内容区 -->
+      <div class="yungu-content-list">
+        <ul id="goods">
+          <template v-for="item in goodsList">
+            <goods-item :goods="item" :key="item.id" @detail="saveScroll"></goods-item>
+          </template>
+        </ul>
+        <div class="infinite-scroll-preloader" id="infinite-scroll-preloader">
+          <div class="preloader"></div>
+        </div>
+      </div>
+    </div>
     <div v-transfer-dom>
       <popup v-model="showFilter" position="right" style="background-color: #fff;">
         <div style="width: 12rem;">
@@ -54,10 +68,10 @@
       </popup>
     </div>
     <nav class="bar bar-tab">
-      <router-link :to="'/index/goods/' + categoryId" class="tab-item">
+      <a class="tab-item active">
         <span class="icon icon-menu"></span>
         <span class="tab-label">首页</span>
-      </router-link>
+      </a>
       <router-link to="/index/orders" class="tab-item">
         <span class="icon icon-me"></span>
         <span class="tab-label">我的订单</span>
@@ -68,22 +82,25 @@
 
 <script>
 import NavBar from "../components/NavBar";
+import GoodsItem from '../components/GoodsListItem'
 import { Popup, TransferDom } from "vux";
 export default {
-  name: 'index',
+  name: 'goods',
   data: function() {
     return {
-      type: '',
       showFilter: false,
       categoryId: '',
       categoryType: '',
       category: {},
       categoryType2: {},
-      category2: null
+      category2: null,
+      pageNo: 1,
+      pageSize: 15,
+      categoryId: '',
+      hospitalCode: '',
+      goodsList: [],
+      scrollTop: 0
     };
-  },
-  watch: {
-    $route: "tabSwitch"
   },
   computed: {
     categoryFmt() {
@@ -91,22 +108,9 @@ export default {
         medical: '药械商品',
         ordinary: '普通商品'
       }[this.categoryType]
-    },
-    title() {
-      return {
-        goods: '商品列表',
-        orders: '我的订单'
-      }[this.type]
     }
   },
   methods: {
-    tabSwitch() {
-      if (this.$route.path.indexOf('orders') > 0) {
-        this.type = 'orders'
-      } else if (this.$route.path.indexOf('goods') > 0) {
-        this.type = 'goods'
-      }
-    },
     // 商品一级分类选择
     categoryClick(e) {
       this.categoryType = e.target.id   
@@ -137,8 +141,8 @@ export default {
     },
     // 商品分类选择完成
     categorySubmit(){
-      this.$router.push(`/index/goods/${this.categoryId}`)
       this.showFilter = false
+      this.refresh()
     },
     // 初始化商品分类
     initCategory() {
@@ -148,15 +152,41 @@ export default {
       this.$_http.categoryOrdinary().then(data => {
         this.category.ordinary = data
       })
-      this.tabSwitch()
+    },
+    initData: function () {
+      this.$_http.goods({
+        pageNo: this.pageNo,
+        pageSize: this.pageSize,
+        categoryId: this.categoryId,
+        hospitalCode: this.hospitalCode
+      }).then(response => {
+        this.goodsList = this.goodsList.concat(response.list)
+      })
+    },
+    refresh: function () {
+      this.pageNo = 1
+      this.goodsList = []
+      this.initData()
+    },
+    tabSwitch(){
+      this.categoryId = this.$route.params.categoryId
+      this.refresh()
+    },
+    saveScroll(){
+      this.scrollTop = document.getElementById('content').scrollTop
     }
   },
   created(){
     this.initCategory()
+    this.initData()
+  },
+  activated(){
+    document.getElementById('content').scrollTop = this.scrollTop
   },
   components: {
     NavBar,
-    Popup
+    Popup,
+    GoodsItem
   },
   directives: {
     TransferDom
@@ -165,9 +195,6 @@ export default {
 </script>
 
 <style>
-.bar-tab .tab-item.router-link-active {
-  color: #0894ec;
-}
 .page {
   z-index: 100;
 }

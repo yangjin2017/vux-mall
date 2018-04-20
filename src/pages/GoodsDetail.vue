@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="yungu-goods-detail-num">
-          <x-number title="数量 :" v-model="bookNum" fillable width="3rem" align="left" :max="999"></x-number>
+          <x-number title="数量 :" v-model="bookNum" fillable width="3rem" align="left" :max="999" :min="bookSpec.specBookMin || 1"></x-number>
           <div class="bookMin" v-if="bookSpec.specBookMin">最小起订量  :  {{ bookSpec.specBookMin }}</div>
         </div>
         <div class="yungu-goods-detail-price">
@@ -46,13 +46,13 @@
     </div>
     <nav class="bar bar-tab yungu-goods-detail-nav">
       <!--<a href="#" class="yungu-goods-detail-add-cart">加入购物车</a>-->
-      <a href="javascript:void(0);" class="yungu-goods-detail-pay">立即购买</a>
+      <a @click="purchase" class="yungu-goods-detail-pay">立即购买</a>
     </nav>
   </div>
 </template>
 
 <script>
-import { Previewer, Swiper, SwiperItem, XNumber, TransferDom } from "vux";
+import { Previewer, Swiper, SwiperItem, XNumber, TransferDom, AlertModule } from "vux";
 import { setTimeout } from 'timers';
 export default {
   data() {
@@ -121,6 +121,21 @@ export default {
     chooseSpec(index){
       this.bookSpec = this.goods.mallGoodsDetailsSpecTVoList[index]
     },
+    purchase(){
+      if (this.$_isEmptyObject(this.bookSpec)) {
+        AlertModule.show({
+          title: '提示信息',
+          content: '请选择商品规格！'
+        })
+      }
+
+      this.$_http.cart({
+        mallGoodsSpecTId: this.bookSpec.id,
+        specNum: this.bookNum
+      }).then(data => {
+        this.$router.push('/order-confirm')
+      })
+    },
     loadGoodsPartData(url, index) {
       
     }
@@ -132,7 +147,7 @@ export default {
     TransferDom,
     goodsPartContent(el, binding, vnode) {
       el.onload = () => {
-        console.log(el.contentWindow.document.body.innerHTML);
+        // console.log(el.contentWindow.document.body.innerHTML);
         // vnode.context.loadGoodsPartData()
       }
     }

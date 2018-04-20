@@ -61,5 +61,14 @@ export default {
         }
       }
     })
+
+    function isEmptyObject (obj) {
+      for (var p in obj) {
+        return false
+      }
+      return true
+    }
+
+    Vue.prototype.$_isEmptyObject = isEmptyObject
   }
 }

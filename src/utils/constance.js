@@ -1,9 +1,17 @@
 export default {
   DOMAIN: 'http://localhost:8080/mall-common/',
-  API: {
-    LOGIN: 'login',
-    GOODSDETAIL: 'goodsDetail',
-    CART: 'cart'
-  },
   LOADING: 'updateLoadingStatus'
+}
+
+export const API = {
+  LOGIN: 'login',
+  GOODSDETAIL: 'goodsDetail',
+  CART: 'cart',
+  SCANLOGIN: 'scanLogin',
+  GOODS: 'goods',
+  CATEGORYMEDICAL: 'categoryMedical',
+  CATEGORYORDINARY: 'categoryOrdinary',
+  CATEGORIES: 'categories',
+  PATIENT: 'patient',
+  ORDERDETAIL: 'orderDetail'
 }

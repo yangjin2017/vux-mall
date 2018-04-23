@@ -53,9 +53,6 @@
 
 <script>
 import { Previewer, Swiper, SwiperItem, XNumber, TransferDom, AlertModule } from "vux"
-import { setTimeout } from 'timers'
-import CONSTANCE from '../utils/constance.js'
-import constance from '../utils/constance.js';
 export default {
   data() {
     return {
@@ -108,7 +105,7 @@ export default {
   },
   methods: {
     initData() {
-      this.$_http(CONSTANCE.API.GOODSDETAIL, {
+      this.$_http(this.$_api.GOODSDETAIL, {
         goodsId: this.$route.params.goodsId
       }).then(data => {
         this.goods = data
@@ -133,7 +130,7 @@ export default {
         return
       }
 
-      this.$_http(CONSTANCE.API.CART, {
+      this.$_http(this.$_api.CART, {
         mallGoodsSpecTId: this.bookSpec.id,
         specNum: this.bookNum
       }).then(data => {
@@ -148,13 +145,7 @@ export default {
     this.initData()
   },
   directives: {
-    TransferDom,
-    goodsPartContent(el, binding, vnode) {
-      el.onload = () => {
-        // console.log(el.contentWindow.document.body.innerHTML);
-        // vnode.context.loadGoodsPartData()
-      }
-    }
+    TransferDom
   }
 };
 </script>

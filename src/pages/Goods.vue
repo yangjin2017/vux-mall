@@ -146,15 +146,15 @@ export default {
     },
     // 初始化商品分类
     initCategory() {
-      this.$_http.categoryMedical().then(data => {
+      this.$_http(this.$_api.CATEGORYMEDICAL).then(data => {
         this.category.medical = data
       })
-      this.$_http.categoryOrdinary().then(data => {
+      this.$_http(this.$_api.CATEGORYORDINARY).then(data => {
         this.category.ordinary = data
       })
     },
     initData: function () {
-      this.$_http.goods({
+      this.$_http(this.$_api.GOODS, {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
         categoryId: this.categoryId,

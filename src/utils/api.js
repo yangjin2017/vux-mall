@@ -1,5 +1,5 @@
 import axios from 'axios'
-import CONSTANCE from './constance.js'
+import { default as CONSTANCE, API } from './constance.js'
 import store from '../store'
 
 export default {
@@ -20,8 +20,24 @@ export default {
     }
 
     const apiUrl = {
-      [CONSTANCE.API.GOODSDETAIL]: params => [`app/mall-goods/goods/${params.goodsId}/message`],
-      [CONSTANCE.API.CART]: params => [`mall-user-shop-cart/users/${getUser().userId}/cart`, 'post']
+      // 获取商品详情
+      [API.GOODSDETAIL]: params => [`app/mall-goods/goods/${params.goodsId}/message`],
+      // 商品加入购物车
+      [API.CART]: params => [`mall-user-shop-cart/users/${getUser().userId}/cart`, 'post'],
+      // 扫描二维码登录
+      [API.SCANLOGIN]: params => ['app-mall-scan/login'],
+      // 商品列表
+      [API.GOODS]: params => ['app/mall-goods/goods'],
+      // 加载药械商品的分类
+      [API.CATEGORYMEDICAL]: params => ['app/mall-platform-category/categories/medical'],
+      // 加载普通商品的分类
+      [API.CATEGORYORDINARY]: params => ['app/mall-platform-category/categories/ordinary'],
+      // 加载商品二级分类
+      [API.CATEGORIES]: params => [`app/mall-platform-category/parent/${params.categoryId}/categories/`],
+      // 获取当前用户地址信息
+      [API.PATIENT]: params => [`mall-user-address/users/${getUser().userId}/hospital`],
+      // 获取订单详细信息
+      [API.ORDERDETAIL]: params => [`mall-user-shop-cart/users/${getUser().userId}/cart/part`]
     }
 
     function fetch (api, data = {}, isHideLoading = false) {

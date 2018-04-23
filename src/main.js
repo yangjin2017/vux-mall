@@ -6,12 +6,14 @@ import router from './router'
 import store from './store'
 import App from './App'
 import utils from './utils/utils'
-import api from './utils/api'
+import http from './utils/api'
+import { API } from './utils/constance'
 
 Vue.use(utils)
-Vue.use(api)
+Vue.use(http)
 FastClick.attach(document.body)
 Vue.config.productionTip = false
+Vue.prototype.$_api = API
 
 router.beforeEach(function (to, from, next) {
   store.commit('updateLoadingStatus', {isLoading: true})
@@ -22,7 +24,6 @@ router.afterEach(function (to) {
   store.commit('updateLoadingStatus', {isLoading: false})
 })
 
-/* eslint-disable no-new */
 new Vue({
   router,
   store,

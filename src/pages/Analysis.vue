@@ -32,7 +32,7 @@ function login(vm){
   let m = vm.$route.query.m
   let p = vm.$route.query.p
   let v = vm.$route.query.v
-  vm.$_http.scanLogin({
+  vm.$_http(this.$_api.SCANLOGIN, {
     p: p
   }).then(res => {
     vm.$_localUser.removeUser()

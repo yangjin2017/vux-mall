@@ -38,7 +38,7 @@
 
           <div class="tabs yungu-good-detail-tab">
             <div class="tab" ></div>
-            <iframe v-for="(item, index) in goods.mallGoodsPartList" :key="index" :src="item.partUrl" frameborder="0" scrolling="no" v-goods-part-content="index"></iframe>
+            <iframe v-for="(item, index) in goods.mallGoodsPartList" :key="index" :src="item.partUrl" frameborder="0" scrolling="no" ></iframe>
           </div>
         </div>
         <div class="yungu-disabled-content"></div>
@@ -134,7 +134,7 @@ export default {
         mallGoodsSpecTId: this.bookSpec.id,
         specNum: this.bookNum
       }).then(data => {
-        this.$router.push(`/order-confirm/${data}`)
+        this.$router.push(`/order-confirm/${data}/shop`)
       })
     },
     loadGoodsPartData(url, index) {

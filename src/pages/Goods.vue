@@ -72,7 +72,7 @@
         <span class="icon icon-menu"></span>
         <span class="tab-label">首页</span>
       </a>
-      <router-link to="/index/orders" class="tab-item">
+      <router-link to="/orders" class="tab-item">
         <span class="icon icon-me"></span>
         <span class="tab-label">我的订单</span>
       </router-link>

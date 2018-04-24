@@ -23,30 +23,31 @@ export default {
         this.$router.push('supplier-order-confirm')
       }
     } else {
-      login(this)
+      this.login()
+    }
+  },
+  methods: {
+    login(){
+      let m = this.$route.query.m
+      let p = this.$route.query.p
+      let v = this.$route.query.v
+      this.$_http(this.$_api.SCANLOGIN, {
+        p: p
+      }).then(res => {
+        this.$_localUser.removeUser()
+        this.$_localUser.setUserId(res.mallSysUserInfoId)
+        this.$_localUser.setToken(res.token)
+        switch (parseInt(m)) {
+          case 1:
+            this.$router.push(`order-confirm/${v}/scan`)
+            break
+          case 2:
+            this.$router.push('/orders')
+            break
+        }    
+      })
     }
   }
-}
-
-function login(vm){
-  let m = vm.$route.query.m
-  let p = vm.$route.query.p
-  let v = vm.$route.query.v
-  vm.$_http(this.$_api.SCANLOGIN, {
-    p: p
-  }).then(res => {
-    vm.$_localUser.removeUser()
-    vm.$_localUser.setUserId(res.mallSysUserInfoId)
-    vm.$_localUser.setToken(res.token)
-    switch (parseInt(m)) {
-      case 1:
-        vm.$router.push(`order-confirm?v=${v}`)
-        break
-      case 2:
-        vm.$router.push(`index/orders`)
-        break
-    }    
-  })
 }
 </script>
 

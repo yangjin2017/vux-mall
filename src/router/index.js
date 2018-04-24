@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/pages/Index'
-import GoodsList from '@/pages/GoodsList'
 import goodsDetail from '@/pages/GoodsDetail'
 import Orders from '@/pages/Orders'
 import Analysis from '@/pages/Analysis'
@@ -12,6 +10,7 @@ import SupplierLogin from '@/pages/SupplierLogin'
 import SupplierOrderConfirm from '@/pages/SupplierOrderConfirm'
 import Goods from '@/pages/Goods'
 import NotFound from '@/pages/NotFound'
+import Pay from '@/pages/Pay'
 
 Vue.use(Router)
 
@@ -19,24 +18,12 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/index',
-      component: Index,
-      redirect: '/index/goods',
-      children: [
-        {
-          path: 'goods', component: GoodsList
-        },
-        {
-          path: 'goods/:categoryId', component: GoodsList
-        },
-        {
-          path: 'orders', component: Orders
-        }
-      ]
-    },
-    {
       path: '/goods',
       component: Goods
+    },
+    {
+      path: '/orders',
+      component: Orders
     },
     {
       path: '/goods-detail/:goodsId',
@@ -59,7 +46,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/order-confirm/:v',
+      path: '/order-confirm/:v/:from',
       component: OrderConfirm,
       props: true
     },
@@ -74,6 +61,11 @@ export default new Router({
     {
       path: '*',
       component: NotFound
+    },
+    {
+      path: '/pay/:payType/:orderNo/:totalPrice',
+      component: Pay,
+      props: true
     }
   ],
   scrollBehavior (to, from, savedPosition) {

@@ -13,5 +13,9 @@ export const API = {
   CATEGORYORDINARY: 'categoryOrdinary',
   CATEGORIES: 'categories',
   PATIENT: 'patient',
-  ORDERDETAIL: 'orderDetail'
+  ORDERS: 'orders',
+  ORDERDETAIL: 'orderDetail',
+  ORDERDETAILFROMSCAN: 'orderDetailFromScan',
+  SUBMITORDER: 'submitOrder',
+  SUBMITORDERSCAN: 'submitOrderScan'
 }

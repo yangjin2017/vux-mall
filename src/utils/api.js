@@ -36,8 +36,16 @@ export default {
       [API.CATEGORIES]: params => [`app/mall-platform-category/parent/${params.categoryId}/categories/`],
       // 获取当前用户地址信息
       [API.PATIENT]: params => [`mall-user-address/users/${getUser().userId}/hospital`],
+      // 获取订单列表
+      [API.ORDERS]: params => [`app-mall-scan/users/${getUser().userId}/orders`],
       // 获取订单详细信息
-      [API.ORDERDETAIL]: params => [`mall-user-shop-cart/users/${getUser().userId}/cart/part`]
+      [API.ORDERDETAIL]: params => [`mall-user-shop-cart/users/${getUser().userId}/cart/part`],
+      // 用户扫描二维码获取订单详细信息
+      [API.ORDERDETAILFROMSCAN]: params => [`app-mall-scan/users/${getUser().userId}/cart`],
+      // 在线商城购买商品提交订单
+      [API.SUBMITORDER]: params => [`mall-user-order/users/${getUser().userId}/order`, 'post'],
+      // 扫码购买商品提交订单
+      [API.SUBMITORDERSCAN]: params => [`app-mall-scan/user/orders`, 'post']
     }
 
     function fetch (api, data = {}, isHideLoading = false) {
@@ -61,6 +69,8 @@ export default {
             this.$router.push('/timeout')
           } else if (data != null && data.code === 'A-00000' && data.obj !== undefined) {
             resolve(data.obj)
+          } else {
+            reject(data)
           }
         }, err => {
           reject(err)

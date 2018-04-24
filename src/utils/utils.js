@@ -72,3 +72,30 @@ export default {
     Vue.prototype.$_isEmptyObject = isEmptyObject
   }
 }
+
+export const regexUtil = {
+  isPhone: function (phone) {
+    var pattern = /^1[34578]\d{9}$/
+    return pattern.test(phone)
+  },
+  isChinaName: function (name) {
+    var pattern = /^[\u4E00-\u9FA5]{2,6}$/
+    return pattern.test(name)
+  },
+  isAddress: function (address) {
+    var pattern = /^[\u4E00-\u9FA5a-zA-Z0-9]{2,30}$/
+    return pattern.test(address)
+  },
+  isCode: function (code) {
+    var pattern = /^\d{4}$/
+    return pattern.test(code)
+  },
+  isCardNo: function (card) {
+    var pattern = /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/
+    return pattern.test(card)
+  },
+  isEmail: function (email) {
+    var pattern = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
+    return pattern.test(email)
+  }
+}

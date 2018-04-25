@@ -17,5 +17,6 @@ export const API = {
   ORDERDETAIL: 'orderDetail',
   ORDERDETAILFROMSCAN: 'orderDetailFromScan',
   SUBMITORDER: 'submitOrder',
-  SUBMITORDERSCAN: 'submitOrderScan'
+  SUBMITORDERSCAN: 'submitOrderScan',
+  ADDRESSES: 'addresses'
 }

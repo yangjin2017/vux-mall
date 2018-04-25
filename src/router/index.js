@@ -11,6 +11,8 @@ import SupplierOrderConfirm from '@/pages/SupplierOrderConfirm'
 import Goods from '@/pages/Goods'
 import NotFound from '@/pages/NotFound'
 import Pay from '@/pages/Pay'
+import Addresses from '@/pages/Addresses'
+import AddressesAdd from '@/pages/AddressAdd'
 
 Vue.use(Router)
 
@@ -66,6 +68,14 @@ export default new Router({
       path: '/pay/:payType/:orderNo/:totalPrice',
       component: Pay,
       props: true
+    },
+    {
+      path: '/addresses',
+      component: Addresses
+    },
+    {
+      path: '/address-add',
+      component: AddressesAdd
     }
   ],
   scrollBehavior (to, from, savedPosition) {

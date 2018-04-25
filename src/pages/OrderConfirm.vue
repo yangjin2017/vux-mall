@@ -3,7 +3,7 @@
     <nav-bar title='确认订单'></nav-bar>
     <div class="content yungu-order-detail-success">
       <!-- 这里是页面内容区 -->
-      <div class="yungu-order-detail-header">
+      <div class="yungu-order-detail-header" @click="chooseAddress">
         <div class="yungu-order-detail-header-info">
           <div class="yungu-order-detail-header-content">
             <div class="pull-left yungu-order-detail-header-lcation"></div>
@@ -141,7 +141,10 @@ export default {
     getOrders,
     getOrdersFromScan,
     getGoodsNumAndTotalPrice,
-    submit
+    submit,
+    chooseAddress(){
+      this.$router.push('/addresses')
+    }
   }
 }
 

@@ -1,6 +1,8 @@
 <template>
   <header class="bar bar-nav">
-    <slot name="back"></slot>
+    <a class="button button-link button-nav pull-left" v-if="isBack" @click="back">
+      <span class="yungu-icon yungu-icon-go-right"></span>
+    </a>
     <h1 class="title" v-text="title"></h1>
     <slot name="right"></slot>
   </header>
@@ -9,7 +11,16 @@
 <script>
   export default {
     props: {
-      title: ''
+      title: String,
+      isBack: {
+        type: Boolean,
+        default: false
+      }
+    },
+    methods: {
+      back(){
+        this.$router.go(-1)
+      }
     }
   }
 </script>

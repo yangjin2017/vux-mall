@@ -45,7 +45,9 @@ export default {
       // 在线商城购买商品提交订单
       [API.SUBMITORDER]: params => [`mall-user-order/users/${getUser().userId}/order`, 'post'],
       // 扫码购买商品提交订单
-      [API.SUBMITORDERSCAN]: params => [`app-mall-scan/user/orders`, 'post']
+      [API.SUBMITORDERSCAN]: params => [`app-mall-scan/user/orders`, 'post'],
+      // 获取地址列表
+      [API.ADDRESSES]: params => [`mall-user-address/users/${getUser().userId}/addresses`]
     }
 
     function fetch (api, data = {}, isHideLoading = false) {

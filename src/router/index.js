@@ -74,8 +74,9 @@ export default new Router({
       component: Addresses
     },
     {
-      path: '/address-add',
-      component: AddressesAdd
+      path: '/address-add/:id',
+      component: AddressesAdd,
+      props: true
     }
   ],
   scrollBehavior (to, from, savedPosition) {

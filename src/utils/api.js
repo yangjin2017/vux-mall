@@ -47,7 +47,17 @@ export default {
       // 扫码购买商品提交订单
       [API.SUBMITORDERSCAN]: params => [`app-mall-scan/user/orders`, 'post'],
       // 获取地址列表
-      [API.ADDRESSES]: params => [`mall-user-address/users/${getUser().userId}/addresses`]
+      [API.ADDRESSES]: params => [`mall-user-address/users/${getUser().userId}/addresses`],
+      // 获取国内地址信息
+      [API.AREA]: params => [`mall-sys-china/pid/${params.pid}`],
+      // 新增|修改收货地址
+      [API.ADDRESSUPD]: params => [`mall-user-address/users/${getUser().userId}/address`, params.id ? 'put' : 'post'],
+      // 获取指定收货地址信息
+      [API.ADDRESS]: params => [`mall-user-address/users/${getUser().userId}/addresses/${params.id}`],
+      // 设置默认地址
+      [API.DEFAULTADDRESS]: params => [`mall-user-address/users/${getUser().userId}/addresses/${params.id}`, 'put'],
+      // 删除地址
+      [API.ADDRESSDEL]: params => [`mall-user-address/users/${getUser().userId}/addresses/${params.id}`, 'delete']
     }
 
     function fetch (api, data = {}, isHideLoading = false) {
@@ -66,19 +76,17 @@ export default {
         }).then(response => {
           var data = response.data
           if (!data) {
-            reject(data)
+            this.$vux.toast.text('服务异常', 'bottom')
           } else if (data.code === 'A-00028') {
             this.$router.push('/timeout')
-          } else if (data != null && data.code === 'A-00000' && data.obj !== undefined) {
+          } else if (data != null && data.code === 'A-00000') {
             resolve(data.obj)
           } else {
             reject(data)
           }
-        }, err => {
-          reject(err)
         })
-        .catch(error => {
-          reject(error)
+        .catch(() => {
+          this.$vux.toast.text('网络异常', 'bottom')
         })
         .finally(() => {
           if (!isHideLoading) {

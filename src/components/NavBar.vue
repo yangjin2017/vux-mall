@@ -3,6 +3,7 @@
     <a class="button button-link button-nav pull-left" v-if="isBack" @click="back">
       <span class="yungu-icon yungu-icon-go-right"></span>
     </a>
+    <slot name="left"></slot>
     <h1 class="title" v-text="title"></h1>
     <slot name="right"></slot>
   </header>
@@ -18,7 +19,7 @@
       }
     },
     methods: {
-      back(){
+      back () {
         this.$router.go(-1)
       }
     }

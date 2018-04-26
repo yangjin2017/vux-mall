@@ -99,3 +99,17 @@ export const regexUtil = {
     return pattern.test(email)
   }
 }
+
+export const jsonUtil = {
+  extend () {},
+  /**
+   * json数据更新
+   * @param {JSONObject} src 目标数据
+   * @param {JSONObject} dist  数据源
+   */
+  update (src, dist) {
+    for (var p in src) {
+      src[p] = dist[p] || src[p]
+    }
+  }
+}

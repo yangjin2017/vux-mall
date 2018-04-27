@@ -61,7 +61,13 @@ export default {
       // 支付宝支付
       [API.ALIPAY]: params => ['mall-pay/pay/alipay', 'post'],
       // 微信支付
-      [API.WEIXINPAY]: params => ['mall-pay/pay/weixin', 'post']
+      [API.WEIXINPAY]: params => ['mall-pay/pay/weixin', 'post'],
+      // 获取支付结果并查询是否绑定手机号
+      [API.PAYRESULT]: params => [`app-mall-scan/users/${getUser().userId}/mobile`],
+      // 绑定手机号 - 发送验证码
+      [API.SENDSMS]: params => ['mall-login/mobile/bind/send', 'post'],
+      // 绑定手机号
+      [API.BINDMOBILE]: params => ['mall-login/mobile/bind', 'post']
     }
 
     function fetch (api, data = {}, isHideLoading = false) {

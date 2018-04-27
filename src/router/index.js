@@ -13,6 +13,8 @@ import NotFound from '@/pages/NotFound'
 import Pay from '@/pages/Pay'
 import Addresses from '@/pages/Addresses'
 import AddressesAdd from '@/pages/AddressAdd'
+import PaySuccess from '@/pages/PaySuccess'
+import BindMobile from '@/pages/BindMobile'
 
 Vue.use(Router)
 
@@ -77,6 +79,14 @@ export default new Router({
       path: '/address-add/:id',
       component: AddressesAdd,
       props: true
+    },
+    {
+      path: '/pay-success',
+      component: PaySuccess
+    },
+    {
+      path: '/bind-mobile',
+      component: BindMobile
     }
   ],
   scrollBehavior (to, from, savedPosition) {

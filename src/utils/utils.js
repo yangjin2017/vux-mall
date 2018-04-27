@@ -113,3 +113,17 @@ export const jsonUtil = {
     }
   }
 }
+
+export const orderUtil = {
+  // 缓存订单信息
+  setOrderSession (orderNo, total) {
+    window.localStorage.setItem('order', JSON.stringify({
+      orderNo: orderNo,
+      total: total
+    }))
+  },
+  // 获取本地缓存的订单信息
+  getOrderStorage () {
+    return JSON.parse(window.localStorage.getItem('order'))
+  }
+}

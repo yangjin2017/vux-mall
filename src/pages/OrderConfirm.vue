@@ -87,9 +87,8 @@
 <script>
 import NavBar from '../components/NavBar'
 import OrderGoodsItem from '../components/OrderGoodsItem'
-import { regexUtil } from '../utils/utils'
+import { regexUtil, orderUtil } from '../utils/utils'
 import { AlertModule } from 'vux'
-import { axiosForm } from '../utils/api'
 export default {
   data: function () {
     return {
@@ -100,21 +99,17 @@ export default {
       orders: [],
       goodsNum: 0,
       goodsPrice: 0,
-      payMode: 1,
+      payMode: 1,   // 微信支付：1， 支付宝支付：2
       leavingMsg: ''
     }
   },
   props: ['v', 'from'],
   computed: {
     supplierSource: function () {
-      let supplierSource = '1'
-      this.orders.map(item => {
-        if (item.supplierSource == '2') {
-          supplierSource = '2'
-          return
-        }
+      let isHaitao = this.orders.some(item => {
+        return item.supplierSource == '2'
       })
-      return supplierSource
+      return isHaitao ? '2' : '1'
     }
   },
   components: {
@@ -126,14 +121,14 @@ export default {
     switch (this.from) {
       case 'scan':
         this.getOrdersFromScan()
-        break;
-    
+        break
+
       case 'shop':
         this.getOrders()
-        break;
-    
+        break
+
       default:
-        break;
+        break
     }
   },
   methods: {
@@ -142,7 +137,7 @@ export default {
     getOrdersFromScan,
     getGoodsNumAndTotalPrice,
     submit,
-    chooseAddress(){
+    chooseAddress () {
       this.$router.push('/addresses')
     }
   }
@@ -150,14 +145,13 @@ export default {
 
 // 获取病人信息
 function getPatient () {
-  const userId = this.$_localUser.getUser().userId
   this.$_http(this.$_api.PATIENT).then(res => {
     this.patient = res
   })
 }
 
 // 订单商品数量及总价计算
-function getGoodsNumAndTotalPrice() {
+function getGoodsNumAndTotalPrice () {
   let goodsNum = 0
   let goodsPrice = 0
   this.orders[0].goodsList.map(goods => {
@@ -182,7 +176,7 @@ function getOrders () {
 }
 
 // 用户扫描二维码获取订单信息
-function getOrdersFromScan() {
+function getOrdersFromScan () {
   this.$_http(this.$_api.ORDERDETAILFROMSCAN, {
     v: this.v
   }).then(res => {
@@ -193,11 +187,7 @@ function getOrdersFromScan() {
 }
 
 //  提交订单
-function submit() {
-  // let url = `mall-user-order/users/${this.$_localUser.getUser().userId}/order`
-  // if (this.from === 'scan') {
-  //   url = 'app-mall-scan/user/orders'
-  // }
+function submit () {
   let url = this.$_api.SUBMITORDER
   if (this.from === 'scan') {
     url = this.$_api.SUBMITORDERSCAN
@@ -208,10 +198,6 @@ function submit() {
     payType: this.payMode,
     addressId: this.patient.id,
     idList: this.v,
-    // orderFullList: [{
-    //   mallSupplierInfoId: self.orders[0].mallSupplierInfoId,
-    //   leavingMsg: self.leavingMsg
-    // }]
     'orderFullList[0].mallSupplierInfoId': self.orders[0].mallSupplierInfoId,
     'orderFullList[0].leavingMsg': self.leavingMsg
   }
@@ -236,13 +222,16 @@ function submit() {
   }
 
   this.$_http(url, params).then(res => {
-    this.$router.push(`/pay/${this.payMode}/${res}/${this.goodsPrice}`)
+    orderUtil.setOrderSession(res, this.goodsPrice)
+    this.$router.push(`/pay/${this.payMode}`)
   }).catch(res => {
     if (res.code == 'A-00044') {
       AlertModule.show({
         title: '提示信息',
         content: '收货地址必填'
       })
+    } else {
+      this.$vux.toast.text(res.msg, 'bottom')
     }
   })
 }

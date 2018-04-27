@@ -57,7 +57,11 @@ export default {
       // 设置默认地址
       [API.DEFAULTADDRESS]: params => [`mall-user-address/users/${getUser().userId}/addresses/${params.id}`, 'put'],
       // 删除地址
-      [API.ADDRESSDEL]: params => [`mall-user-address/users/${getUser().userId}/addresses/${params.id}`, 'delete']
+      [API.ADDRESSDEL]: params => [`mall-user-address/users/${getUser().userId}/addresses/${params.id}`, 'delete'],
+      // 支付宝支付
+      [API.ALIPAY]: params => ['mall-pay/pay/alipay', 'post'],
+      // 微信支付
+      [API.WEIXINPAY]: params => ['mall-pay/pay/weixin', 'post']
     }
 
     function fetch (api, data = {}, isHideLoading = false) {

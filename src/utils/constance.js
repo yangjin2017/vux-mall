@@ -1,5 +1,5 @@
 export default {
-  DOMAIN: 'http://localhost:8080/mall-common/',
+  DOMAIN: 'http://192.168.80.45:8080/mall-common/',
   LOADING: 'updateLoadingStatus'
 }
 
@@ -23,5 +23,7 @@ export const API = {
   ADDRESSUPD: 'addressupd',
   ADDRESS: 'address',
   DEFAULTADDRESS: 'defaultaddress',
-  ADDRESSDEL: 'addressdel'
+  ADDRESSDEL: 'addressdel',
+  ALIPAY: 'alipay',
+  WEIXINPAY: 'weixinpay'
 }

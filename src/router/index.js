@@ -65,7 +65,7 @@ export default new Router({
       component: NotFound
     },
     {
-      path: '/pay/:payType/:orderNo/:totalPrice',
+      path: '/pay/:payType',
       component: Pay,
       props: true
     },

@@ -6,12 +6,13 @@
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
       isWeixin: this.$_isWeixin()
     }
   },
-  created: function() {
+  created() {
+    if (this.isWeixin) return
     let p = this.$route.query.p
     let m = this.$route.query.m
     if (m === '3') {
@@ -27,7 +28,7 @@ export default {
     }
   },
   methods: {
-    login(){
+    login() {
       let m = this.$route.query.m
       let p = this.$route.query.p
       let v = this.$route.query.v
@@ -44,7 +45,7 @@ export default {
           case 2:
             this.$router.push('/orders')
             break
-        }    
+        }
       })
     }
   }

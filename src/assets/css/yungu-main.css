@@ -1487,3 +1487,6 @@
     border: none;
     width: 70%;
 }
+.img-err {
+    background: url(./assets/img/none-image.png);
+}

@@ -1,7 +1,7 @@
 <template>
   <li>
     <div class="yungu-my-order-content-image">
-      <img :src="goods.goodsImg || goods.specImg">
+      <x-img :src="goods.goodsImg || goods.specImg" default-src="http://192.168.80.35:8020/mall-web/img/none-image.png" container=".yungu-my-orders-tab-content" :offset="100"></x-img>
     </div>
     <div class="yungu-my-order-content-detail">
       <span class="yungu-my-order-content-detail-name">{{ goods.goodsName || goods.mallGoodsName }}</span>
@@ -16,9 +16,11 @@
 </template>
 
 <script>
+  import { XImg } from 'vux'
   export default {
-    props: {
-      goods: {}
+    props: ['goods'],
+    components: {
+      XImg
     }
   }
 </script>

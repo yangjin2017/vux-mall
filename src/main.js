@@ -8,11 +8,12 @@ import App from './App'
 import utils from './utils/utils'
 import http from './utils/api'
 import { API } from './utils/constance'
-import { ToastPlugin } from 'vux'
+import { ToastPlugin, AlertPlugin } from 'vux'
 
 Vue.use(utils)
 Vue.use(http)
 Vue.use(ToastPlugin, {position: 'bottom', width: 'auto'})
+Vue.use(AlertPlugin)
 FastClick.attach(document.body)
 Vue.config.productionTip = false
 Vue.prototype.$_api = API

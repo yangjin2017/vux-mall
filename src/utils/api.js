@@ -77,7 +77,8 @@ export default {
       // 提醒发货
       [API.ORDERREMIND]: params => [`mall-user-order/users/${getUser().userId}/orders/remind/${params.orderId}`],
       // 确认收货
-      [API.ORDERRECEIVING]: params => [`mall-user-order/users/${getUser().userId}/orders/${params.orderId}/past`, 'put']
+      [API.ORDERRECEIVING]: params => [`mall-user-order/users/${getUser().userId}/orders/${params.orderId}/past`, 'put'],
+      [API.ORDERCOMPLAINT]: params => [`mall-user-order/users/${getUser().userId}/orders/${params.orderId}/complaint`]
     }
 
     function fetch (api, data = {}, isHideLoading = false) {

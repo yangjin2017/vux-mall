@@ -12,7 +12,7 @@
         
       <div class="content-block yungu-my-orders-tab-content">
         <template v-for="item in orderList">
-          <order-list-item :order="item" :key="item.id"></order-list-item>
+          <order-list-item :order="item" :key="item.id" @refresh="tabSwitch()"></order-list-item>
         </template>
       </div>
       <!-- 加载提示符 -->
@@ -52,7 +52,9 @@ export default {
      * @argument String status 订单状态
      */
     tabSwitch: function (status) {
-      this.status = status
+      if (status) {
+        this.status = status
+      }
       this.pageNo = 1
       this.orderList = []
       this.initData()

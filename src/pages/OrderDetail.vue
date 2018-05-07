@@ -7,7 +7,7 @@
           :class="{ 'color-default': order.status == '0',
                     'color-warning': order.status == '4' }">
           <template>
-            {{ orderStatus }}<small v-if="order.status == '1'">（ {{ order.payOverTime }} 分钟后自动关闭）</small>
+            {{ orderStatus }}<small v-if="order.status == '1'">（ {{ order.payOverTime > 0 ? order.payOverTime : 0 }} 分钟后自动关闭）</small>
           </template>
           <template v-if="order.status == 5">
             {{ order.backStatus == 1 ? '退款成功  订单关闭' : '交易完成' }}
@@ -84,7 +84,7 @@
       <!--<a class="pull-right yungu-order-detail-confirm" href="#">
 				确认收货
 			</a>-->
-      <!-- <a class="pull-right yungu-order-detail-post">投诉</a> -->
+      <!-- <a class="pull-right yungu-order-detail-post" @click="orderComplaint">投诉</a> -->
       <template v-if="order.status == '1'">
         <a class="pull-right yungu-order-detail-confirm" @click="orderPay">付款</a>
 			  <a class="pull-right yungu-order-detail-post" @click="orderCancel">取消订单</a>
@@ -246,6 +246,10 @@ export default {
     // 退货
     orderReturns () {
       this.$router.push()
+    },
+    // 投诉
+    orderComplaint () {
+      this.$router.push(`/order-complaint/${this.order.id}`)
     }
   }
 }

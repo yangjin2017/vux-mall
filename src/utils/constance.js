@@ -34,5 +34,6 @@ export const API = {
   ORDERPAY: 'orderPay',
   ORDERREMIND: 'orderRemind',
   ORDERRECEIVING: 'orderReceiving',
-  ORDERRETURNS: 'orderReturns'
+  ORDERRETURNS: 'orderReturns',
+  ORDERCOMPLAINT: 'orderComplaint'
 }

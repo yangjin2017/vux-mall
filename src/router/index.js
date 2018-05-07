@@ -16,6 +16,7 @@ import AddressesAdd from '@/pages/AddressAdd'
 import PaySuccess from '@/pages/PaySuccess'
 import BindMobile from '@/pages/BindMobile'
 import OrderDetail from '@/pages/OrderDetail'
+import OrderComplaint from '@/pages/OrderComplaint'
 
 Vue.use(Router)
 
@@ -92,6 +93,11 @@ export default new Router({
     {
       path: '/order-detail/:orderId',
       component: OrderDetail,
+      props: true
+    },
+    {
+      path: '/order-complaint/:orderId',
+      component: OrderComplaint,
       props: true
     }
   ],

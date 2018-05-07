@@ -35,11 +35,11 @@ export default {
       filters: {
         priceFormat: function (value) {
           if (!value) {
-            return 0.00
+            return '0.00'
           }
           var f = parseFloat(value)
           if (isNaN(f)) {
-            return 0.00
+            return '0.00'
           }
           f = Math.round(f * 100) / 100
           var s = f.toString()

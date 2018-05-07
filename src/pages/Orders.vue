@@ -41,11 +41,16 @@ export default {
     return {
       pageNo: 1,
       pageSize: 10,  // 每次加载添加多少条目
-      status: '1',
+      status: '1',    // {'1': '待付款', '2': '待发货', '3': '待收货', '4': '历史订单'}
       orderList: []
     }
   },
+  // TODO: 翻页 | 下拉刷新
   methods: {
+    /**
+     * @description 切换订单状态
+     * @argument String status 订单状态
+     */
     tabSwitch: function (status) {
       this.status = status
       this.pageNo = 1

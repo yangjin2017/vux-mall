@@ -15,6 +15,7 @@ import Addresses from '@/pages/Addresses'
 import AddressesAdd from '@/pages/AddressAdd'
 import PaySuccess from '@/pages/PaySuccess'
 import BindMobile from '@/pages/BindMobile'
+import OrderDetail from '@/pages/OrderDetail'
 
 Vue.use(Router)
 
@@ -87,6 +88,11 @@ export default new Router({
     {
       path: '/bind-mobile',
       component: BindMobile
+    },
+    {
+      path: '/order-detail/:orderId',
+      component: OrderDetail,
+      props: true
     }
   ],
   scrollBehavior (to, from, savedPosition) {

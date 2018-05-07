@@ -10,6 +10,7 @@
     <div class="yungu-my-order-content-price">
       <span class="yungu-my-order-conent-price-now"><small>￥{{ (goods.priceSpec || goods.specPrice) | priceFormat }}</small> </span>
       <span class="yungu-my-order-conent-price-num">× {{ goods.goodsNum || goods.specNum }}</span>
+      <slot name="refund-btn"></slot>
     </div>
   </li>
 </template>

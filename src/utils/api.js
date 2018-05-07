@@ -67,7 +67,17 @@ export default {
       // 绑定手机号 - 发送验证码
       [API.SENDSMS]: params => ['mall-login/mobile/bind/send', 'post'],
       // 绑定手机号
-      [API.BINDMOBILE]: params => ['mall-login/mobile/bind', 'post']
+      [API.BINDMOBILE]: params => ['mall-login/mobile/bind', 'post'],
+      // 获取订单详情
+      [API.QUERYORDERDETAIL]: params => [`mall-user-order/users/${getUser().userId}/orders/${params.orderId}`],
+      // 取消订单
+      [API.CACELORDER]: params => [`mall-user-order/users/${getUser().userId}/orders/cancel/${params.orderId}`, 'post'],
+      // 订单支付
+      [API.ORDERPAY]: params => ['app-mall-scan/user/order', 'post'],
+      // 提醒发货
+      [API.ORDERREMIND]: params => [`mall-user-order/users/${getUser().userId}/orders/remind/${params.orderId}`],
+      // 确认收货
+      [API.ORDERRECEIVING]: params => [`mall-user-order/users/${getUser().userId}/orders/${params.orderId}/past`, 'put']
     }
 
     function fetch (api, data = {}, isHideLoading = false) {

@@ -115,7 +115,11 @@ export const jsonUtil = {
 }
 
 export const orderUtil = {
-  // 缓存订单信息
+  /**
+   * 缓存订单信息
+   * @param {String} orderNo 订单号
+   * @param {String} total 总价
+   */
   setOrderSession (orderNo, total) {
     window.localStorage.setItem('order', JSON.stringify({
       orderNo: orderNo,

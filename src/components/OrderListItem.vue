@@ -1,5 +1,5 @@
 <template>
-  <div class="yungu-my-orders-card">
+  <div class="yungu-my-orders-card" @click="orderDetail">
     <div class="yungu-my-order-header">
       <span class="yungu-order-seller">{{ order.merchantName }}</span>
       <span class="yungu-order-detail"></span>
@@ -26,7 +26,7 @@
         <div class="yungu-my-order-footer-detail-post">满 {{ order.freeMailLimit | priceFormat }} 免运费</div>
       </div>
       <div class="yungu-my-order-footer-todo">
-        <a class="yungu-my-order-footer-first-a complaint" order-id="'+value.id+'" href="javascript:void(0);">投诉</a>
+        <a class="yungu-my-order-footer-first-a complaint">投诉</a>
       </div>
     </div>
   </div>
@@ -39,11 +39,13 @@
       order: {}
     },
     filters: {
+      // 格式化订单状态
       orderStatusFilter: function (status) {
         return ['订单关闭', '等待付款', '待发货', '已发货', '订单取消', '交易完成'][status]
       }
     },
     computed: {
+      // 计算总商品数量
       goodsNum: function () {
         var goodsNum = 0
         this.order.mallOrderGoodsSnapList.forEach(item => {
@@ -54,6 +56,12 @@
     },
     components: {
       OrderGoodsItem
+    },
+    // 订单点击页面跳转
+    methods: {
+      orderDetail () {
+        this.$router.push(`order-detail/${this.order.id}`)
+      }
     }
   }
 </script>

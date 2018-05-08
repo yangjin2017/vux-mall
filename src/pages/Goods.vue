@@ -13,7 +13,7 @@
         <div class="pull-to-refresh-arrow"></div>
       </div>
       <!-- 这里是页面内容区 -->
-      <scroller ref="goodsScroller" lock-x :use-pulldown="true" :use-pullup="true" height="-50" @on-pullup-loading="loadMore">
+      <scroller ref="goodsScroller" lock-x :use-pulldown="true" :use-pullup="true" height="-50" @on-pullup-loading="loadMore" @on-pulldown-loading="refresh" :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
         <div class="yungu-content-list" id="goods">
           <ul>
             <template v-for="item in goodsList">
@@ -92,7 +92,16 @@ export default {
       hospitalCode: '',
       goodsList: [],
       scrollTop: 0,
-      mescroll: null
+      mescroll: null,
+      pulldownConfig: {
+        content: '下拉刷新',
+        downContent: '下拉刷新',
+        upContent: '松开刷新页面'
+      },
+      pullupConfig: {
+        downContent: '加载更多',
+        upContent: '加载更多'
+      }
     }
   },
   computed: {
@@ -163,6 +172,10 @@ export default {
       this.pageNo = 1
       this.goodsList = []
       this.initData()
+      this.$nextTick(() => {
+        this.$refs.goodsScroller.reset()
+        this.$refs.goodsScroller.donePulldown()
+      })
     },
     // 记录滚动条位置
     saveScroll() {
@@ -173,6 +186,7 @@ export default {
       this.pageNo++
       this.initData()
       this.$nextTick(() => {
+        this.$refs.goodsScroller.reset()
         this.$refs.goodsScroller.donePullup()
       })
     }

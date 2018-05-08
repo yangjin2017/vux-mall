@@ -1,7 +1,7 @@
 <template>
   <li class="yungu-item-content row no-gutter" @click="openDetail">
     <div class="yungu-item-image">
-      <x-img :src="goods.goodsImg" container="#content" :offset="100"></x-img>
+      <img :src="goods.goodsImg" />
     </div>
     <div class="yungu-item-desc">
       <div class="yungu-item-desc-name">
@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { XImg } from 'vux'
 export default {
   props: {
     goods: {
@@ -27,9 +26,6 @@ export default {
       goodsIntroduction: '',
       priceSpec: ''
     }
-  },
-  components: {
-    XImg
   },
   methods: {
     openDetail() {

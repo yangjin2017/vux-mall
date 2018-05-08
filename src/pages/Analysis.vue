@@ -8,15 +8,13 @@
 export default {
   data() {
     return {
-      isWeixin: this.$_isWeixin()
+      isWeixin: this.$_isWeixin() // 判断当前浏览器环境是否为微信内置浏览器
     }
   },
   created() {
     if (this.isWeixin) return
-    let p = this.$route.query.p
     let m = this.$route.query.m
     if (m === '3') {
-      window.localStorage.setItem('userInfo', p)
       let user = this.$_localUser.getUser
       if (user.userId == null || user.token == null) {
         this.$router.push('supplier-login')
@@ -32,7 +30,7 @@ export default {
       let m = this.$route.query.m
       let p = this.$route.query.p
       let v = this.$route.query.v
-      this.$_http(this.$_api.SCANLOGIN, {
+      this.$_http().scanLogin({
         p: p
       }).then(res => {
         this.$_localUser.removeUser()

@@ -32,7 +32,7 @@ export default {
   props: ['orderId'],
   methods: {
     submit () {
-      this.$_http(this.$_api.ORDERCOMPLAINT, {
+      this.$_http().orderComplaint({
         orderId: this.orderId
       }).then(res => {
         this.$vux.toast.text('投诉成功', 'bottom')

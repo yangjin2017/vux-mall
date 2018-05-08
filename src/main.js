@@ -7,7 +7,6 @@ import store from './store'
 import App from './App'
 import utils from './utils/utils'
 import http from './utils/api'
-import { API } from './utils/constance'
 import { ToastPlugin, AlertPlugin } from 'vux'
 
 Vue.use(utils)
@@ -16,7 +15,6 @@ Vue.use(ToastPlugin, {position: 'bottom', width: 'auto'})
 Vue.use(AlertPlugin)
 FastClick.attach(document.body)
 Vue.config.productionTip = false
-Vue.prototype.$_api = API
 
 router.beforeEach(function (to, from, next) {
   store.commit('updateLoadingStatus', {isLoading: true})

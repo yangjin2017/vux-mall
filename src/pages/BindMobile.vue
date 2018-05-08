@@ -74,7 +74,7 @@ export default {
         this.$vux.toast.text('请输入正确的手机号码', 'bottom')
         return
       }
-      this.$_http(this.$_api.SENDSMS, {
+      this.$_http().sendSms({
         mobile: this.mobile
       }).then(res => {
         this.count = 60
@@ -109,7 +109,7 @@ export default {
       this.$vux.toast.text('验证码不正确', 'bottom')
       return
     }
-    this.$_http(this.$_api.BINDMOBILE, {
+    this.$_http().bindMobile({
       mobile: this.mobile,
       code: this.code
     }).then(res => {

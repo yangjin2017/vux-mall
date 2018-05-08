@@ -21,10 +21,10 @@
         </div>
         <div class="yungu-goods-detail-num">
           <x-number title="数量 :" v-model="bookNum" fillable width="3rem" align="left" :max="999" :min="bookSpec.specBookMin || 1"></x-number>
-          <div class="bookMin" v-if="bookSpec.specBookMin">最小起订量  :  {{ bookSpec.specBookMin }}</div>
+          <div class="bookMin" v-if="bookSpec.specBookMin">最小起订量 : {{ bookSpec.specBookMin }}</div>
         </div>
         <div class="yungu-goods-detail-price">
-          <span class="yungu-goods-detail-price-now">¥ 
+          <span class="yungu-goods-detail-price-now">¥
             <template v-if="bookSpec.priceSpec">{{ bookSpec.priceSpec | priceFormat }}</template>
             <template v-else-if="priceSize.min == priceSize.max">{{ priceSize.min | priceFormat }}</template>
             <template v-else>{{ priceSize.min | priceFormat }} ~ {{ priceSize.max | priceFormat }}</template>
@@ -37,8 +37,8 @@
           </div>
 
           <div class="tabs yungu-good-detail-tab">
-            <div class="tab" ></div>
-            <iframe v-for="(item, index) in goods.mallGoodsPartList" :key="index" :src="item.partUrl" frameborder="0" scrolling="no" ></iframe>
+            <div class="tab"></div>
+            <iframe v-for="(item, index) in goods.mallGoodsPartList" :key="index" :src="item.partUrl" frameborder="0" scrolling="no"></iframe>
           </div>
         </div>
         <div class="yungu-disabled-content"></div>
@@ -52,22 +52,29 @@
 </template>
 
 <script>
-import { Previewer, Swiper, SwiperItem, XNumber, TransferDom, AlertModule } from "vux"
+import {
+  Previewer,
+  Swiper,
+  SwiperItem,
+  XNumber,
+  TransferDom,
+  AlertModule
+} from 'vux'
 export default {
   data() {
     return {
       goods: {},
       bookNum: 1,
       bookSpec: {}
-    };
+    }
   },
   computed: {
-    swiperList(){
+    swiperList() {
       var arr = []
       arr.push(this.goods.goodsImg)
       arr = arr.concat(this.goods.mallGoodsGallerys)
       return arr.map((item, index) => {
-        return {src: item}
+        return { src: item }
       })
     },
     priceSize() {
@@ -105,22 +112,22 @@ export default {
   },
   methods: {
     initData() {
-      this.$_http(this.$_api.GOODSDETAIL, {
+      this.$_http().goodsDetail({
         goodsId: this.$route.params.goodsId
       }).then(data => {
         this.goods = data
       })
     },
-    swiperClick(index){
+    swiperClick(index) {
       this.$refs.previewer.show(index)
     },
-    back(){
+    back() {
       this.$router.go(-1)
     },
-    chooseSpec(index){
+    chooseSpec(index) {
       this.bookSpec = this.goods.mallGoodsDetailsSpecTVoList[index]
     },
-    purchase(){
+    purchase() {
       if (this.$_isEmptyObject(this.bookSpec)) {
         AlertModule.show({
           title: '提示信息',
@@ -130,24 +137,23 @@ export default {
         return
       }
 
-      this.$_http(this.$_api.CART, {
+      this.$_http().cart({
         mallGoodsSpecTId: this.bookSpec.id,
         specNum: this.bookNum
       }).then(data => {
         this.$router.push(`/order-confirm/${data}/shop`)
       })
     },
-    loadGoodsPartData(url, index) {
-      
-    }
+    // TODO: 商品详情 -- 参数
+    loadGoodsPartData(url, index) {}
   },
-  created(){
+  created() {
     this.initData()
   },
   directives: {
     TransferDom
   }
-};
+}
 </script>
 
 <style>
@@ -155,7 +161,7 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
-input[type="number"]{
+input[type='number'] {
   -moz-appearance: textfield;
 }
 .yungu-goods-detail-num {
@@ -165,7 +171,7 @@ input[type="number"]{
 .yungu-goods-detail-num .weui-cell__ft {
   padding-left: 0.4rem;
 }
-.yungu-goods-detail-num .weui-cell{
+.yungu-goods-detail-num .weui-cell {
   padding: 0;
   margin-right: 0.5rem;
 }

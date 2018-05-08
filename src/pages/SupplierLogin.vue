@@ -63,7 +63,7 @@ export default {
  * 登录
  */
 function login (vm) {
-  vm.$_http.login({
+  vm.$_http().login({
 		username: vm.phone,
 		password: vm.pwd
   }).then(res => {

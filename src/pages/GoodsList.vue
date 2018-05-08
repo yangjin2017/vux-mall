@@ -22,7 +22,7 @@
 <script>
 import GoodsItem from '../components/GoodsListItem'
 export default {
-  data: function () {
+  data: function() {
     return {
       pageNo: 1,
       pageSize: 15,
@@ -32,31 +32,33 @@ export default {
     }
   },
   methods: {
-    initData: function () {
-      this.$_http.goods({
-        pageNo: this.pageNo,
-        pageSize: this.pageSize,
-        categoryId: this.categoryId,
-        hospitalCode: this.hospitalCode
-      }).then(response => {
-        this.goodsList = this.goodsList.concat(response.list)
-      })
+    initData: function() {
+      this.$_http()
+        .goods({
+          pageNo: this.pageNo,
+          pageSize: this.pageSize,
+          categoryId: this.categoryId,
+          hospitalCode: this.hospitalCode
+        })
+        .then(response => {
+          this.goodsList = this.goodsList.concat(response.list)
+        })
     },
-    refresh: function () {
+    refresh: function() {
       this.pageNo = 1
       this.goodsList = []
       this.initData()
     },
-    tabSwitch(){
+    tabSwitch() {
       this.categoryId = this.$route.params.categoryId
       this.refresh()
     }
   },
-  created: function () {
+  created: function() {
     this.initData()
   },
   watch: {
-    $route: "tabSwitch"
+    $route: 'tabSwitch'
   },
   components: {
     GoodsItem
@@ -65,4 +67,5 @@ export default {
 </script>
 
 <style>
+
 </style>

@@ -110,7 +110,7 @@ export default {
       return
     }
     this.title = '修改地址'
-    this.$_http(this.$_api.ADDRESS, {
+    this.$_http().address({
       id: this.id
     }).then(data => {
       jsonUtil.update(this.params, data.userAddress)
@@ -159,7 +159,7 @@ export default {
         params.isDefault = 'Y'
       }
 
-      this.$_http(this.$_api.ADDRESSUPD, params).then(res => {
+      this.$_http().addressupd(params).then(res => {
         this.$vux.toast.text('保存成功', 'bottom')
         this.$router.go(-1)
       }).catch(err => {

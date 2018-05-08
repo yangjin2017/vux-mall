@@ -60,7 +60,7 @@ export default {
       this.initData()
     },
     initData: function () {
-      this.$_http(this.$_api.ORDERS, {
+      this.$_http().orders({
         pageNo: this.pageNo,
         pageSize: this.pageSize,
         status: this.status

@@ -48,7 +48,7 @@ export default {
     }
   },
   created () {
-    this.$_http(this.$_api.PAYRESULT, {
+    this.$_http().payResult({
       orderNo: orderUtil.getOrderStorage().orderNo
     }).catch(err => {
       this.status = err.code

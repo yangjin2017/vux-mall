@@ -44,7 +44,7 @@ export default {
   methods: {
     // 获取该用户添加过的地址信息列表
     initData () {
-      this.$_http(this.$_api.ADDRESSES).then(data => {
+      this.$_http().addresses().then(data => {
         this.addresses = data
       })
     },
@@ -55,7 +55,7 @@ export default {
     // 设置当前地址信息为默认地址
     setDefaultAddress (id, isDefault) {
       if (isDefault === 'Y') return
-      this.$_http(this.$_api.DEFAULTADDRESS, {
+      this.$_http().defaultaddress({
         id: id
       }).then(res => {
         this.$vux.toast.text('修改默认地址成功', 'bottom')

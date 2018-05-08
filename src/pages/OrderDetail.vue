@@ -165,7 +165,7 @@ export default {
   },
   methods: {
     initData () { // 获取订单详情信息
-      this.$_http(this.$_api.QUERYORDERDETAIL, {
+      this.$_http().queryOrderDetail({
         orderId: this.orderId
       }).then(data => {
         this.order = data
@@ -173,7 +173,7 @@ export default {
     },
     // 取消订单
     orderCancel () {
-      this.$_http(this.$_api.CACELORDER, {
+      this.$_http().cacelOrder({
         orderId: this.orderId
       }).then(res => {
         this.$vux.toast.text('操作成功', 'bottom')
@@ -184,7 +184,7 @@ export default {
     },
     // 订单支付
     orderPay () {
-      this.$_http(this.$_api.ORDERPAY, {
+      this.$_http().orderPay({
         payType: this.payType,
         orderNo: this.order.orderNo
       }).then(res => {
@@ -199,7 +199,7 @@ export default {
     payedEvent (key, item) {
       switch (key) {
         case 'success':
-          this.$_http(this.$_api.PAYRESULT, {
+          this.$_http().payResult({
             orderNo: this.order.orderNo,
             payType: this.payType
           }).then(res => {
@@ -223,7 +223,7 @@ export default {
     },
     // 提醒发货
     orderRemind () {
-      this.$_http(this.$_api.ORDERREMIND, {
+      this.$_http().orderRemind({
         orderId: this.orderId
       }).then(res => {
         this.$vux.toast.text('操作成功', 'bottom')
@@ -237,7 +237,7 @@ export default {
     },
     // 确认收货
     orderReceiving () {
-      this.$_http(this.$_api.ORDERRECEIVING, {
+      this.$_http().orderReceiving({
         orderId: this.orderId
       }).then(res => {
         this.$router.push('/orders')

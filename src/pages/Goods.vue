@@ -8,10 +8,10 @@
     </nav-bar>
     <div class="content pull-to-refresh-content" id="content">
       <!-- 默认的下拉刷新层 -->
-      <div class="pull-to-refresh-layer">
+      <!-- <div class="pull-to-refresh-layer">
         <div class="preloader"></div>
         <div class="pull-to-refresh-arrow"></div>
-      </div>
+      </div> -->
       <!-- 这里是页面内容区 -->
       <scroller ref="goodsScroller" lock-x :use-pulldown="true" :use-pullup="true" height="-50" @on-pullup-loading="loadMore" @on-pulldown-loading="refresh" :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
         <div class="yungu-content-list" id="goods">
@@ -22,9 +22,9 @@
           </ul>
         </div>
       </scroller>
-      <div class="infinite-scroll-preloader" id="infinite-scroll-preloader">
+      <!-- <div class="infinite-scroll-preloader" id="infinite-scroll-preloader">
         <div class="preloader"></div>
-      </div>
+      </div> -->
     </div>
     <!-- 分类选择弹窗 -->
     <div v-transfer-dom>
@@ -125,7 +125,7 @@ export default {
         id: e.target.title,
         categoryCnName: e.target.innerHTML
       }
-      this.$_http(this.$_api.CATEGORIES, {
+      this.$_http().categories({
         categoryId: this.categoryId
       })
       .then(data => {
@@ -149,16 +149,16 @@ export default {
     },
     // 初始化商品分类
     initCategory() {
-      this.$_http(this.$_api.CATEGORYMEDICAL).then(data => {
+      this.$_http().categoryMedical().then(data => {
         this.category.medical = data
       })
-      this.$_http(this.$_api.CATEGORYORDINARY).then(data => {
+      this.$_http().categoryOrdinary().then(data => {
         this.category.ordinary = data
       })
     },
     // 获取商品列表数据
     initData: function() {
-      this.$_http(this.$_api.GOODS, {
+      this.$_http().goods({
         pageNo: this.pageNo,
         pageSize: this.pageSize,
         categoryId: this.categoryId,

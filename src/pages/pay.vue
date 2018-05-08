@@ -37,8 +37,8 @@ export default {
       this.$router.push('/orders')
     },
     submit () {
-      const url = [this.$_api.WEIXINPAY, this.$_api.ALIPAY][this.payType - 1]
-      this.$_http(url, {
+      const url = ['weixinpay', 'alipay'][this.payType - 1]
+      this.$_http()[url]({
         v: this.orderNo
       }).then(res => {
         window.location.href = res

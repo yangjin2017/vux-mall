@@ -145,7 +145,7 @@ export default {
 
 // 获取病人信息
 function getPatient () {
-  this.$_http(this.$_api.PATIENT).then(res => {
+  this.$_http().patient().then(res => {
     this.patient = res
   })
 }
@@ -167,7 +167,7 @@ function getGoodsNumAndTotalPrice () {
 
 // 获取订单信息
 function getOrders () {
-  this.$_http(this.$_api.ORDERDETAIL, {
+  this.$_http().orderDetail({
     idList: this.v
   }).then(res => {
     this.orders = res
@@ -177,7 +177,7 @@ function getOrders () {
 
 // 用户扫描二维码获取订单信息
 function getOrdersFromScan () {
-  this.$_http(this.$_api.ORDERDETAILFROMSCAN, {
+  this.$_http().orderDetailFromScan({
     v: this.v
   }).then(res => {
     this.orders = res.orders
@@ -188,9 +188,9 @@ function getOrdersFromScan () {
 
 //  提交订单
 function submit () {
-  let url = this.$_api.SUBMITORDER
+  let url = 'submitOrder'
   if (this.from === 'scan') {
-    url = this.$_api.SUBMITORDERSCAN
+    url = 'submitOrderScan'
   }
 
   const self = this
@@ -221,7 +221,7 @@ function submit () {
     params.mailbox = this.mailbox
   }
 
-  this.$_http(url, params).then(res => {
+  this.$_http()[url](params).then(res => {
     orderUtil.setOrderSession(res, this.goodsPrice)
     this.$router.push(`/pay/${this.payMode}`)
   }).catch(res => {

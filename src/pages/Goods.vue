@@ -13,17 +13,20 @@
         <div class="pull-to-refresh-arrow"></div>
       </div>
       <!-- 这里是页面内容区 -->
-      <div class="yungu-content-list">
-        <ul id="goods">
-          <template v-for="item in goodsList">
-            <goods-item :goods="item" :key="item.id" @detail="saveScroll"></goods-item>
-          </template>
-        </ul>
-        <div class="infinite-scroll-preloader" id="infinite-scroll-preloader">
-          <div class="preloader"></div>
+      <scroller ref="goodsScroller" lock-x :use-pulldown="true" :use-pullup="true" height="-50" @on-pullup-loading="loadMore">
+        <div class="yungu-content-list" id="goods">
+          <ul>
+            <template v-for="item in goodsList">
+              <goods-item :goods="item" :key="item.id" @detail="saveScroll"></goods-item>
+            </template>
+          </ul>
         </div>
+      </scroller>
+      <div class="infinite-scroll-preloader" id="infinite-scroll-preloader">
+        <div class="preloader"></div>
       </div>
     </div>
+    <!-- 分类选择弹窗 -->
     <div v-transfer-dom>
       <popup v-model="showFilter" position="right" style="background-color: #fff;">
         <div style="width: 12rem;">
@@ -39,30 +42,20 @@
               <li id="li_1" v-if="categoryType">
                 <div id="categoryType" class="categoryClass">{{categoryFmt}}</div>
                 <div id="category" class="categoryClass">
-                  <span class="yungu-filter-name" 
-                    v-for="item in category[categoryType]"
-                    :key="item.id"
-                    :title="item.id"
-                    :class="{ active: item.id == categoryType2.id }"
-                    @click="category1Click">{{ item.categoryCnName }}</span>
+                  <span class="yungu-filter-name" v-for="item in category[categoryType]" :key="item.id" :title="item.id" :class="{ active: item.id == categoryType2.id }" @click="category1Click">{{ item.categoryCnName }}</span>
                 </div>
               </li>
               <li id="li_2" v-if="categoryType2.id">
                 <div id="categoryType2" class="categoryClass">{{ categoryType2.categoryCnName }}</div>
                 <div id="category2" class="categoryClass">
-                  <span class="yungu-filter-name" 
-                    v-for="item in category2"
-                    :key="item.id"
-                    :title="item.id"
-                    :class="{ active: item.id == categoryId }"
-                    @click="category2Click">{{ item.categoryCnName }}</span>
+                  <span class="yungu-filter-name" v-for="item in category2" :key="item.id" :title="item.id" :class="{ active: item.id == categoryId }" @click="category2Click">{{ item.categoryCnName }}</span>
                 </div>
               </li>
             </ul>
           </div>
           <div class="yungu-list-filter-bottons" style="width: 12rem;">
-              <div class="yungu-filter-reset pull-left" @click="categoryCancel">重置</div>
-              <div class="yungu-filter-submit pull-left" @click="categorySubmit">完成</div>
+            <div class="yungu-filter-reset pull-left" @click="categoryCancel">重置</div>
+            <div class="yungu-filter-submit pull-left" @click="categorySubmit">完成</div>
           </div>
         </div>
       </popup>
@@ -81,9 +74,9 @@
 </template>
 
 <script>
-import NavBar from "../components/NavBar";
+import NavBar from '../components/NavBar'
 import GoodsItem from '../components/GoodsListItem'
-import { Popup, TransferDom } from "vux";
+import { Popup, TransferDom, Scroller } from 'vux'
 export default {
   name: 'goods',
   data: function() {
@@ -96,11 +89,11 @@ export default {
       category2: null,
       pageNo: 1,
       pageSize: 15,
-      categoryId: '',
       hospitalCode: '',
       goodsList: [],
-      scrollTop: 0
-    };
+      scrollTop: 0,
+      mescroll: null
+    }
   },
   computed: {
     categoryFmt() {
@@ -113,34 +106,35 @@ export default {
   methods: {
     // 商品一级分类选择
     categoryClick(e) {
-      this.categoryType = e.target.id   
-      this.categoryType2 = {}   
+      this.categoryType = e.target.id
+      this.categoryType2 = {}
     },
     // 商品二级分类选择
-    category1Click(e){
+    category1Click(e) {
       this.categoryId = e.target.title
       this.categoryType2 = {
         id: e.target.title,
         categoryCnName: e.target.innerHTML
       }
-      this.$_http.categories({
+      this.$_http(this.$_api.CATEGORIES, {
         categoryId: this.categoryId
-      }).then(data => {
+      })
+      .then(data => {
         this.category2 = data
       })
     },
     // 商品三级分类选择
-    category2Click(e){
+    category2Click(e) {
       this.categoryId = e.target.title
     },
     // 商品分类选择重置
-    categoryCancel(){
+    categoryCancel() {
       this.categoryId = ''
       this.categoryType = ''
       this.categoryType2 = {}
     },
     // 商品分类选择完成
-    categorySubmit(){
+    categorySubmit() {
       this.showFilter = false
       this.refresh()
     },
@@ -153,7 +147,8 @@ export default {
         this.category.ordinary = data
       })
     },
-    initData: function () {
+    // 获取商品列表数据
+    initData: function() {
       this.$_http(this.$_api.GOODS, {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
@@ -163,35 +158,43 @@ export default {
         this.goodsList = this.goodsList.concat(response.list)
       })
     },
-    refresh: function () {
+    // 刷新页面
+    refresh: function() {
       this.pageNo = 1
       this.goodsList = []
       this.initData()
     },
-    tabSwitch(){
-      this.categoryId = this.$route.params.categoryId
-      this.refresh()
-    },
-    saveScroll(){
+    // 记录滚动条位置
+    saveScroll() {
       this.scrollTop = document.getElementById('content').scrollTop
+    },
+    // 加载更多数据
+    loadMore () {
+      this.pageNo++
+      this.initData()
+      this.$nextTick(() => {
+        this.$refs.goodsScroller.donePullup()
+      })
     }
   },
-  created(){
+  created() {
     this.initCategory()
     this.initData()
   },
-  activated(){
+  // 当页面重新显示时将滚动条回滚到之前记录的位置
+  activated() {
     document.getElementById('content').scrollTop = this.scrollTop
   },
   components: {
     NavBar,
     Popup,
+    Scroller,
     GoodsItem
   },
   directives: {
     TransferDom
   }
-};
+}
 </script>
 
 <style>

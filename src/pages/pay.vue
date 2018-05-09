@@ -55,7 +55,7 @@ export default {
             break
 
           case 'A-00029':
-
+            this.$router.push('/pay-fail')
             break
 
           default:

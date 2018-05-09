@@ -17,6 +17,7 @@ import PaySuccess from '@/pages/PaySuccess'
 import BindMobile from '@/pages/BindMobile'
 import OrderDetail from '@/pages/OrderDetail'
 import OrderComplaint from '@/pages/OrderComplaint'
+import PayFail from '@/pages/PayFail'
 
 Vue.use(Router)
 
@@ -99,6 +100,10 @@ export default new Router({
       path: '/order-complaint/:orderId',
       component: OrderComplaint,
       props: true
+    },
+    {
+      path: '/pay-fail',
+      component: PayFail
     }
   ],
   scrollBehavior (to, from, savedPosition) {

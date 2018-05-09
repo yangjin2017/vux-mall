@@ -20,6 +20,10 @@ export default {
     }
 
     function fetch (url, data = {}, method = 'get', isHideLoading = false) {
+      if (url.indexOf('userTimeOut') > 0) {
+        return
+      }
+
       if (!isHideLoading) {
         store.commit(CONSTANCE.LOADING, {isLoading: true})
       }
@@ -63,7 +67,9 @@ export default {
         const userId = window.localStorage.getItem('userId')
         if (!userId) {
           self.$router.push('/timeout')
+          return 'userTimeOut'
         }
+        return userId
       }
 
       return {
@@ -72,7 +78,7 @@ export default {
         // 获取商品详情
         goodsDetail: params => fetch.call(self, `app/mall-goods/goods/${params.goodsId}/message`, params),
         // 商品加入购物车
-        cart: params => fetch.call(self, `mall-user-shop-cart/users/${getUser().userId}/cart`, params, 'post'),
+        cart: params => fetch.call(self, `mall-user-shop-cart/users/${getUserId()}/cart`, params, 'post'),
         // 扫描二维码登录
         scanLogin: params => fetch.call(self, 'app-mall-scan/login', params),
         // 加载药械商品的分类

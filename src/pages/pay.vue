@@ -41,11 +41,17 @@ export default {
       this.$_http()[url]({
         v: this.orderNo
       }).then(res => {
-        window.location.href = res
+        if (this.payType === '1') {
+          window.location.href = res
+        } else if (this.payType === '2') {
+          var temp = document.createElement('div')
+          temp.innerHTML = res
+          document.getElementsByTagName('body')[0].appendChild(temp)
+        }
       }).catch(err => {
         switch (err.code) {
           case 'A-00047':
-
+            this.$router.push('/pay-success')
             break
 
           case 'A-00029':

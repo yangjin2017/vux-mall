@@ -37,6 +37,7 @@
 import NavBar from '../components/NavBar'
 import OrderListItem from '@/components/OrderListItem'
 export default {
+  name: 'orders',
   data: function () {
     return {
       pageNo: 1,

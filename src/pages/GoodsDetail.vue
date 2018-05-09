@@ -57,8 +57,7 @@ import {
   Swiper,
   SwiperItem,
   XNumber,
-  TransferDom,
-  AlertModule
+  TransferDom
 } from 'vux'
 export default {
   data() {
@@ -129,7 +128,7 @@ export default {
     },
     purchase() {
       if (this.$_isEmptyObject(this.bookSpec)) {
-        AlertModule.show({
+        this.$vux.alert.show({
           title: '提示信息',
           content: '请选择商品规格！',
           maskZIndex: 2000

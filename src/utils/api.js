@@ -21,7 +21,7 @@ export default {
 
     function fetch (url, data = {}, method = 'get', isHideLoading = false) {
       if (url.indexOf('userTimeOut') > 0) {
-        return
+        return new Promise((resolve, reject) => {})
       }
 
       if (!isHideLoading) {
@@ -132,7 +132,11 @@ export default {
         // 确认收货
         orderReceiving: params => fetch.call(self, `mall-user-order/users/${getUserId()}/orders/${params.orderId}/past`, params, 'put'),
         // 投诉
-        orderComplaint: params => fetch.call(self, `mall-user-order/users/${getUserId()}/orders/${params.orderId}/complaint`)
+        orderComplaint: params => fetch.call(self, `mall-user-order/users/${getUserId()}/orders/${params.orderId}/complaint`),
+        // 手机验证码登录 -- 发送验证码
+        loginSendSms: params => fetch.call(self, 'mall-login/mobile/send', params, 'post'),
+        // 手机验证码登录
+        login: params => fetch.call(self, 'mall-login/mobile/login', params, 'post')
       }
     }
   }

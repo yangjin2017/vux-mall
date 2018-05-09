@@ -215,4 +215,8 @@ export default {
 .page {
   z-index: 100;
 }
+.pull-to-refresh-content.content{
+  top: 2.2rem;
+  bottom: 2.5rem;
+}
 </style>

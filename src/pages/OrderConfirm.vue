@@ -88,7 +88,6 @@
 import NavBar from '../components/NavBar'
 import OrderGoodsItem from '../components/OrderGoodsItem'
 import { regexUtil, orderUtil } from '../utils/utils'
-import { AlertModule } from 'vux'
 export default {
   data: function () {
     return {
@@ -204,14 +203,14 @@ function submit () {
 
   if (this.supplierSource === '2') {
     if (!regexUtil.isCardNo(this.identityCard)) {
-      AlertModule.show({
+      this.$vux.alert.show({
         title: '提示信息',
         content: '请输入正确的身份证号'
       })
       return
     }
     if (!regexUtil.isEmail(this.mailbox)) {
-      AlertModule.show({
+      this.$vux.alert.show({
         title: '提示信息',
         content: '请输入正确的邮箱'
       })
@@ -225,8 +224,8 @@ function submit () {
     orderUtil.setOrderSession(res, this.goodsPrice)
     this.$router.push(`/pay/${this.payMode}`)
   }).catch(res => {
-    if (res.code == 'A-00044') {
-      AlertModule.show({
+    if (res.code === 'A-00044') {
+      this.$vux.alert.show({
         title: '提示信息',
         content: '收货地址必填'
       })

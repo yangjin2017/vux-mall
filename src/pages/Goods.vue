@@ -211,7 +211,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .page {
   z-index: 100;
 }

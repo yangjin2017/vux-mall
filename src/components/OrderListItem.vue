@@ -117,7 +117,7 @@
       },
       // 取消订单
       orderCancel () {
-        this.$_http(this.$_api.CACELORDER, {
+        this.$_http().cacelOrder({
           orderId: this.order.id
         }).then(res => {
           const self = this
@@ -132,7 +132,7 @@
       },
       // 提醒发货
       orderRemind () {
-        this.$_http(this.$_api.ORDERREMIND, {
+        this.$_http().orderRemind({
           orderId: this.orderId
         }).then(res => {
           this.$vux.toast.text('操作成功', 'bottom')
@@ -146,7 +146,7 @@
       },
       // 确认收货
       orderReceiving () {
-        this.$_http(this.$_api.ORDERRECEIVING, {
+        this.$_http().orderReceiving({
           orderId: this.orderId
         }).then(res => {
           this.$router.push('/orders')

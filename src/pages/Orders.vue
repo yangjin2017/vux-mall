@@ -47,6 +47,9 @@ export default {
       orderList: []
     }
   },
+  created() {
+    this.initData()
+  },
   // TODO: 翻页 | 下拉刷新
   methods: {
     /**
@@ -75,9 +78,6 @@ export default {
     NavBar,
     Scroller,
     OrderListItem
-  },
-  created: function () {
-    this.initData()
   }
 }
 </script>

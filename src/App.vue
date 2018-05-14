@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive include="goods">
+    <keep-alive include="goods,orders">
       <router-view></router-view>
     </keep-alive>
     <loading v-model="isLoading"></loading>

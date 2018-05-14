@@ -1,3 +1,6 @@
+/**
+ * 订单列表 -- 订单卡片
+ */
 <template>
   <div class="yungu-my-orders-card" @click="orderDetail">
     <div class="yungu-my-order-header">
@@ -66,7 +69,7 @@
 </template>
 
 <script>
-  import OrderGoodsItem from '../components/OrderGoodsItem'
+  import OrderGoodsItem from '../components/OrderGoodsItem.vue'
   export default {
     props: {
       order: {}
@@ -82,7 +85,7 @@
       },
       // 格式化订单状态
       orderStatus () {
-        if (this.order.status == 5 && this.order.backStatus == 1) {
+        if (this.order.status === 5 && this.order.backStatus === 1) {
           return '退款成功  订单关闭'
         }
         if (this.orderBackStatus === 1) {
@@ -161,7 +164,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .yungu-my-order-content span.yungu-my-order-btn{
   border: none;
 }

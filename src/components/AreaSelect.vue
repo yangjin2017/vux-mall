@@ -62,7 +62,7 @@ export default {
     },
     // 初始化页面数据
     initData () {
-      this.$_http(this.$_api.AREA, {
+      this.$_http().area({
         pid: this.pid
       }).then(data => {
         this.areas.splice(this.level, 1, data)

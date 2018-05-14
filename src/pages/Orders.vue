@@ -35,7 +35,8 @@
 
 <script>
 import NavBar from '../components/NavBar'
-import OrderListItem from '@/components/OrderListItem'
+import OrderListItem from '../components/OrderListItem.vue'
+import { Scroller } from 'vux'
 export default {
   name: 'orders',
   data: function () {
@@ -72,6 +73,7 @@ export default {
   },
   components: {
     NavBar,
+    Scroller,
     OrderListItem
   },
   created: function () {

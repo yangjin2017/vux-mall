@@ -16,7 +16,7 @@
           <order-goods-item :key="item.id" :goods="JSON.parse(item.jsonText)">
             <template v-if="order.mallOrderGoodsSnapList.length > 1">
               <template v-if="orderBackStatus == 0">
-                <a class="yungu-my-order-btn refund" slot="refund-btn">申请退款</a>
+                <a class="yungu-my-order-btn refund" slot="refund-btn" @click.stop="orderGoodsRefund(JSON.parse(item.jsonText).mallGoodsSpecTId)">申请退款</a>
               </template>
               <template v-else-if="orderBackStatus == 2">
                 <span v-if="item.backStatus == 5" class="yungu-my-order-btn" slot="refund-btn">退款完成</span>
@@ -140,9 +140,13 @@
           this.$vux.toast.text(err.msg, 'bottom')
         })
       },
-      // 申请退款
+      // 申请退款 - 订单
       orderRefund () {
-        this.$router.push()
+        this.$router.push(`/order-refund?orderId=${this.order.id}`)
+      },
+      // 申请退款 - 订单内单个商品
+      orderGoodsRefund(specId) {
+        this.$router.push(`/order-refund?orderId=${this.order.id}&specId=${specId}`)
       },
       // 确认收货
       orderReceiving () {

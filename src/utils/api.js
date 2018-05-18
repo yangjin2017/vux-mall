@@ -28,6 +28,36 @@ export default {
         store.commit(CONSTANCE.LOADING, {isLoading: true})
       }
 
+      // 上传文件/图片
+      if (data instanceof FormData) {
+        return new Promise((resolve, reject) => {
+          let config = {
+            headers: getUser()
+          }
+          config.headers['Content-Type'] = 'multipart/form-data'
+          axios.post(url, data, config).then(response => {
+            var data = response.data
+            if (!data) {
+              this.$vux.toast.text('服务异常', 'bottom')
+            } else if (data.code === 'A-00028') {
+              this.$router.push('/timeout')
+            } else if (data != null && data.code === 'A-00000') {
+              resolve(data.obj)
+            } else {
+              reject(data)
+            }
+          })
+          .catch(() => {
+            this.$vux.toast.text('网络异常', 'bottom')
+          })
+          .finally(() => {
+            if (!isHideLoading) {
+              store.commit(CONSTANCE.LOADING, {isLoading: false})
+            }
+          })
+        })
+      }
+
       return new Promise((resolve, reject) => {
         axios({
           method: method,
@@ -136,7 +166,17 @@ export default {
         // 手机验证码登录 -- 发送验证码
         loginSendSms: params => fetch.call(self, 'mall-login/mobile/send', params, 'post'),
         // 手机验证码登录
-        login: params => fetch.call(self, 'mall-login/mobile/login', params, 'post')
+        login: params => fetch.call(self, 'mall-login/mobile/login', params, 'post'),
+        // 获取订单中单个商品信息
+        orderGoods: params => fetch.call(self, `mall-user-order/${getUserId()}/orders/remind/${params.specId}`),
+        // 获取退款原因列表
+        refundReasons: params => fetch.call(self, 'mall-data-dictionary/reasons-for-refunds'),
+        // 图片上传
+        imageUpload: params => fetch.call(self, 'image-upload/imageUpload', params, 'post'),
+        // 订单 - 申请退款
+        orderRefund: params => fetch.call(self, `mall-order-refund/users/${getUserId()}/refund/order/${params.orderId}`, params, 'post'),
+        // 单个商品申请退款
+        goodsRefund: params => fetch.call(self, `mall-order-refund/users/${getUserId()}/refund/goods/${params.orderId}/${params.specId}`, params, 'posot')
       }
     }
   }

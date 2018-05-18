@@ -1,7 +1,7 @@
 <template>
   <li class="yungu-item-content row no-gutter" @click="openDetail">
     <div class="yungu-item-image">
-      <img :src="goods.goodsImg" @error.once="errorImg"/>
+      <x-img :src="goods.goodsImg" container="div.scroll-container" :offset="100" error-class="img-err" default-src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="></x-img>
     </div>
     <div class="yungu-item-desc">
       <div class="yungu-item-desc-name">
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { XImg } from 'vux'
 export default {
   props: {
     goods: {
@@ -27,13 +28,13 @@ export default {
       priceSpec: ''
     }
   },
+  components: {
+    XImg
+  },
   methods: {
     openDetail() {
       this.$emit('detail')
       this.$router.push(`/goods-detail/${this.goods.id}`)
-    },
-    errorImg (e) {
-      e.currentTarget.src = 'https://mall.iyungu.com/mall-web/img/none-image.png'
     }
   }
 }

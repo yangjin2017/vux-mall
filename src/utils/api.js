@@ -176,7 +176,9 @@ export default {
         // 订单 - 申请退款
         orderRefund: params => fetch.call(self, `mall-order-refund/users/${getUserId()}/refund/order/${params.orderId}`, params, 'post'),
         // 单个商品申请退款
-        goodsRefund: params => fetch.call(self, `mall-order-refund/users/${getUserId()}/refund/goods/${params.orderId}/${params.specId}`, params, 'posot')
+        goodsRefund: params => fetch.call(self, `mall-order-refund/users/${getUserId()}/refund/goods/${params.orderId}/${params.specId}`, params, 'post'),
+        // 获取退货地址
+        returnsAddress: params => fetch.call(self, `mall-order-refund/${params.orderId}/mall-refund-order/return-goods-address`, params)
       }
     }
   }

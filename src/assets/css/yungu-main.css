@@ -1488,5 +1488,27 @@
     width: 70%;
 }
 .img-err {
-    background: url(./assets/img/none-image.png);
+    background: url(./assets/img/none-image.png) no-repeat;
+    background-size: 4rem 4rem;
+    width: 4rem;
+    height: 4rem;
+}
+p.default-text {
+    margin: 0;
+}
+.pull-to-refresh-layer:not(.refreshing) .preloader {
+    -webkit-animation: none;
+        animation: none;
+}
+.pull-to-refresh-layer.refreshing .pull-to-refresh-arrow {
+    visibility: hidden;
+    -webkit-transition-duration: 0ms;
+        transition-duration: 0ms;
+}
+.pull-to-refresh-layer.refreshing .preloader {
+    visibility: visible;
+}
+.pull-to-refresh-layer.pull-up .pull-to-refresh-arrow {
+    -webkit-transform: rotate(180deg) translate3d(0, 0, 0);
+        transform: rotate(180deg) translate3d(0, 0, 0);
 }

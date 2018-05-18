@@ -19,6 +19,7 @@ import OrderDetail from '@/pages/OrderDetail'
 import OrderComplaint from '@/pages/OrderComplaint'
 import PayFail from '@/pages/PayFail'
 import OrderRefund from '@/pages/OrderRefund'
+import OrderReturns from '@/pages/OrderReturns'
 
 Vue.use(Router)
 
@@ -109,6 +110,10 @@ export default new Router({
     {
       path: '/order-refund',
       component: OrderRefund
+    },
+    {
+      path: '/order-returns',
+      component: OrderReturns
     }
   ],
   scrollBehavior (to, from, savedPosition) {

@@ -7,13 +7,11 @@
       </a>
     </nav-bar>
     <div class="content pull-to-refresh-content" id="content">
-      <!-- 默认的下拉刷新层 -->
-      <!-- <div class="pull-to-refresh-layer">
-        <div class="preloader"></div>
-        <div class="pull-to-refresh-arrow"></div>
-      </div> -->
-      <!-- 这里是页面内容区 -->
-      <scroller ref="goodsScroller" lock-x :use-pulldown="true" :use-pullup="true" height="-50" @on-pullup-loading="loadMore" @on-pulldown-loading="refresh" :pulldown-config="pulldownConfig" :pullup-config="pullupConfig">
+      <pull-to :top-load-method="refresh" :bottom-load-method="loadMore">
+        <div class="pull-to-refresh-layer" slot="top-block" slot-scope="props" :class="{ 'refreshing': props.state === 'loaded-done', 'pull-up': props.state === 'trigger' }">
+          <div class="preloader"></div>
+          <div class="pull-to-refresh-arrow"></div>
+        </div>
         <div class="yungu-content-list" id="goods">
           <ul>
             <template v-for="item in goodsList">
@@ -21,10 +19,10 @@
             </template>
           </ul>
         </div>
-      </scroller>
-      <!-- <div class="infinite-scroll-preloader" id="infinite-scroll-preloader">
-        <div class="preloader"></div>
-      </div> -->
+        <div class="infinite-scroll-preloader" slot="bottom-block">
+          <div class="preloader"></div>
+        </div>
+      </pull-to>
     </div>
     <!-- 分类选择弹窗 -->
     <div v-transfer-dom>
@@ -76,7 +74,8 @@
 <script>
 import NavBar from '../components/NavBar'
 import GoodsItem from '../components/GoodsListItem'
-import { Popup, TransferDom, Scroller } from 'vux'
+import { Popup, TransferDom } from 'vux'
+import PullTo from 'vue-pull-to'
 export default {
   name: 'goods',
   data: function() {
@@ -168,27 +167,33 @@ export default {
       })
     },
     // 刷新页面
-    refresh: function() {
+    refresh: function(loaded) {
       this.pageNo = 1
       this.goodsList = []
       this.initData()
       this.$nextTick(() => {
-        this.$refs.goodsScroller.reset()
-        this.$refs.goodsScroller.donePulldown()
+        loaded('done')
       })
+      // this.$nextTick(() => {
+      //   this.$refs.goodsScroller.reset()
+      //   this.$refs.goodsScroller.donePulldown()
+      // })
     },
     // 记录滚动条位置
     saveScroll() {
-      this.scrollTop = document.getElementById('content').scrollTop
+      this.scrollTop = document.querySelector('div.scroll-container').scrollTop
     },
     // 加载更多数据
-    loadMore () {
+    loadMore (loaded) {
       this.pageNo++
       this.initData()
       this.$nextTick(() => {
-        this.$refs.goodsScroller.reset()
-        this.$refs.goodsScroller.donePullup()
+        loaded('done')
       })
+      // this.$nextTick(() => {
+      //   this.$refs.goodsScroller.reset()
+      //   this.$refs.goodsScroller.donePullup()
+      // })
     }
   },
   created() {
@@ -197,13 +202,13 @@ export default {
   },
   // 当页面重新显示时将滚动条回滚到之前记录的位置
   activated() {
-    document.getElementById('content').scrollTop = this.scrollTop
+    document.querySelector('div.scroll-container').scrollTop = this.scrollTop
   },
   components: {
     NavBar,
     Popup,
-    Scroller,
-    GoodsItem
+    GoodsItem,
+    PullTo
   },
   directives: {
     TransferDom
